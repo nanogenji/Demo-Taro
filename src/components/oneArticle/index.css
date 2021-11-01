@@ -1,0 +1,28 @@
+.at-article__h3{
+  padding-top: 20px;
+}
+
+.at-article__info{
+  padding-bottom: 20px;
+}
+
+.article-img{
+  display: flex;
+  width: 240px;
+  height: 150px;
+  background-color: #e0e0e0;
+}
+
+.oneArticle{
+  height: 200px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.article-text{
+  height: 200px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+}

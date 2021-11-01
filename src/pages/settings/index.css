@@ -1,0 +1,12 @@
+.title{
+    font-size: 45px;
+    text-align: center;
+}
+.font{
+    margin-left: 30px;
+}
+.logout{
+    margin-top: 30px;
+    color: #f44336;
+    border: 0;
+}

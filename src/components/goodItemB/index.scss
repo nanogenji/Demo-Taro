@@ -1,0 +1,52 @@
+.goodItemB-container{
+  width: 700px;
+  height: 250px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+  background-color: white;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border-radius: 0.6em;
+  .goodItemB-img{
+    width: 280px;
+    height: 206px;
+    border-radius: 0.6em;
+    background: linear-gradient(to bottom, #ff6e7f, #bfe9ff);
+  }
+  .goodItemB-info{
+    width: 390px;
+    height: 220px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    .goodItemB-title{
+      font-size: 32px;
+    }
+    .goodItemB-detail{
+      font-size: 28px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .goodItemB-author{
+      font-size: 28px;
+      color: #9e9e9e;
+    }
+    .goodItemB-lesson{
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      .goodItemB-student{
+        font-size: 26px;
+        color: #9e9e9e;
+      }
+      .goodItemB-phase{
+        font-size: 26px;
+        color: #028255;
+        margin-right: 20px;
+      }
+    }
+  }
+}

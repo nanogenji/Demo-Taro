@@ -1,0 +1,98 @@
+page{
+    height:100%
+}
+
+.header{
+    height:250px;
+    background-color: aqua;
+    border-bottom-right-radius:5em;
+    border-bottom-left-radius:5em;
+}
+
+.user{
+    float: left;
+    margin-top: 80px;
+    margin-left: 90px;
+}
+
+.name{
+    float: right;
+    margin-top: 85px;
+    margin-right: 375px;
+}
+
+.email{
+    float: right;
+    margin-top: 5px;
+    margin-right: 180px;
+}
+
+.core{
+    font-size: 10px;
+}
+
+.order{
+    height:300px;
+    /* background-color: aqua; */
+    margin-top: 20px;
+}
+
+.event{
+    height:270px;
+    /* background-color: aqua; */
+    margin-top: 20px;
+}
+.end{
+    margin-top: 30px;
+}
+.ban1{
+    background-color: #337d56;
+}
+.ban2{
+    background-color: #333;
+}
+.ban3{
+    background-color: #c7bd9a;
+}
+.t1{
+    font-size: 50px;
+    /* color: #fff; */
+    text-align: center;
+    margin: auto;
+}
+.homeCategory{
+    margin-top: 50px;
+}
+.card{
+    margin-top: 30px;
+}
+
+.createPost{
+    float: left;
+    margin-top: 0px;
+    margin-left: 580px;
+}
+
+.onePost_avatar{
+    size: 2px;
+    float: left;
+    margin-top: 5%;
+    margin-left: 8%;
+}
+.onePost_name{
+    font-size: smaller;
+    float: right;
+    margin-top: 6%;
+    margin-right: 420px;
+}
+.onePost_title{
+    font-size: smaller;
+    color: #bdbdbd;
+    float: right;
+    margin-top: 3%;
+    margin-right: 410px;
+}
+.at-article__p{
+    float: left;
+    margin-top: 20px;
+}

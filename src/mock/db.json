@@ -1,0 +1,14 @@
+{
+  "user": {
+    "name": "admin",
+    "tel": "110"
+  },
+  "students": [
+    {
+      "name": "sb"
+    },
+    {
+      "name": "asd"
+    }
+  ]
+}

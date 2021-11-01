@@ -1,0 +1,52 @@
+.review-container{
+  background-color: white;
+  display: flex;
+  flex-flow: row nowrap;
+  width: 700px;
+  height: 230px;
+  .review-avatar{
+    size: 2px;
+    margin-left: 32px;
+    margin-top: 34px;
+  }
+  .review-right{
+    width: 600px;
+    margin-left: 20px;
+    margin-top: 30px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    .review-username{
+      color: #424242;
+      font-size: 29px;
+    }
+    .review-content{
+      font-size: 29px;
+    }
+    .review-rightBottom{
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      .review-info{
+        font-size: smaller;
+        color: #bdbdbd;
+      }
+      .review-rightBottom-action{
+        margin-bottom: 10px;
+        width: 50%;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-evenly;
+        .review-rightBottom-action-img{
+          width: 32px;
+          height: 32px;
+        }
+        .btn{
+          border: none;
+        }
+      }
+    }
+  }
+}
+
+

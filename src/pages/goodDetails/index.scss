@@ -1,0 +1,111 @@
+.goodDetails-container{
+  display: flex;
+  flex-flow: column nowrap;
+  .goodDetails-img{
+    width: 100%;
+    height: 480px;
+    background: #e6005c;
+  }
+  .goodDetails-intro{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-evenly;
+    height: 720px;
+    background-color: #f7f7f7;
+    .goodDetails-header{
+      height: 400px;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: space-around;
+      background-color: white;
+      .goodDetails-header-title{
+        font-size: 46px;
+        margin-left: 50px;
+        margin-top: 50px;
+      }
+      .goodDetails-header-student{
+        font-size: 30px;
+        margin-left: 50px;
+        color: #9e9e9e;
+      }
+      .goodDetails-header-time{
+        font-size: 30px;
+        margin-left: 50px;
+        color: #9e9e9e;
+      }
+      .goodDetails-header-price{
+        font-size: 42px;
+        margin-top: 40px;
+        margin-left: 50px;
+        color: red;
+      }
+    }
+    .goodDetails-author{
+      height: 230px;
+      display: flex;
+      flex-flow: column nowrap;
+      background-color: white;
+      .goodDetails-author-header{
+        font-size: 40px;
+        // font-weight: 600;
+        margin-top: 20px;
+        margin-left: 50px;
+      }
+      .goodDetails-author-content{
+        display: flex;
+        flex-flow: row nowrap;
+        margin-top: 30px;
+        .goodDetails-author-icon{
+        margin-left: 50px;
+          size:2px;
+        }
+        .goodDetails-author-info{
+          margin-left: 30px;
+          display: flex;
+          flex-flow: column nowrap;
+          justify-content: space-between;
+        }
+      }
+    }
+  }
+  .goodDetails-directory{
+    height: 720px;
+    .goodDetails-directory-accordion{
+      margin-top: 20px;
+    }
+  }
+  .goodDetails-reviews{
+    height: 720px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.goodDetails-footer {
+  position: fixed;
+  bottom: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  .goodDetails-footer-icon{
+    margin-left: 36px;
+  }
+  .goodDetails-footer-btn{
+    margin-right: 20px;
+    width: 65%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    .goodDetails-footer-tocartBtn{
+      margin: 0;
+      width: 45%;
+    }
+    .goodDetails-footer-buyBtn{
+      margin: 0;
+      width: 45%;
+    }
+  }
+}
