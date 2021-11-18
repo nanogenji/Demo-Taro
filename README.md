@@ -1,6 +1,6 @@
 # Demo-Taro
 ## 技术
-Taro + Taro UI +Vant Weapp + scss
+Taro + JavaScript + scss + Taro UI +Vant Weapp
 ## 项目运行
 ### 全局安装Taro脚手架
 npm install -g @tarojs/cli
