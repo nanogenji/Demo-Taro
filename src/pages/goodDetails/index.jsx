@@ -42,6 +42,10 @@ export default class GoodDetails extends Component {
     Taro.navigateTo({
       url:'/pages/cart/index'
     })
+    // let date = Date.now();
+    // let rund = Math.ceil(Math.random()*1000)
+    // const cartListObj = {id:date + '' + rund,name:'Taro文档',detail:'',priceInt:'100',priceFloat:'00'}
+    // this.props.add(cartListObj)
   }
   render () {
     const flag = this.state.flag

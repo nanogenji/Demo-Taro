@@ -14,19 +14,17 @@ export default class Index extends Component {
 
 
   render () {
+    const {courseList} = this.props
     return (
       <View className='goodItemB-container' onClick={this.toGoodDetails}>
         <Image className='goodItemB-img'/>
         <View className='goodItemB-info'>
-          <Text className='goodItemB-title'>Taro文档</Text>
-          <Text className='goodItemB-detail'>
-            "Taro 是一个开放式跨端跨框架解决方案，
-            支持使用 React/Vue/Nerv 等框架来开发 微信 / 京东 / 百度 / 支付宝 / 字节跳动 / QQ 小程序 / H5 / RN 等应用。"
-          </Text>
-          <Text className='goodItemB-author'>凹凸实验室</Text>
+          <Text className='goodItemB-title'>{courseList.name} </Text>
+          <Text className='goodItemB-detail'>{courseList.intro} </Text>
+          <Text className='goodItemB-author'>{courseList.author}</Text>
           <View className='goodItemB-lesson'>
-            <Text className='goodItemB-student'>192人参加</Text>
-            <Text className='goodItemB-phase'>进行至第8周</Text>
+            <Text className='goodItemB-student'>{courseList.stuNum + '人参加'}</Text>
+            <Text className='goodItemB-phase'>{'进行至' + courseList.stage}</Text>
           </View>
           <Text></Text>
         </View>

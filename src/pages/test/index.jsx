@@ -21,7 +21,7 @@ class Demo extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      nidie: {
+      testMock: {
         name: "",
         tel: ""
       }
@@ -32,13 +32,13 @@ class Demo extends Component {
       url: 'http://localhost:3001/user'
     })
     .then(res => {
-      this.setState({nidie: res.data})
+      this.setState({testMock: res.data})
     })
   }
   render() {
     return (
       <View>
-        <Text>{this.state.nidie}</Text>
+        <Text>{this.state.testMock}</Text>
       </View>
     )
   }

@@ -33,6 +33,11 @@ export default class CreatePost extends Component {
       'message': '发送成功',
       'type': type,
     })
+    setTimeout(()=>{
+      Taro.navigateBack({
+        delta:1
+      })
+    },1200)
   }
 
   onChange2 (files) {

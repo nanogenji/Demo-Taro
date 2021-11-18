@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import Taro from '@tarojs/taro'
+import ReactDOM from 'react-dom'
 import { View,Text,Image,Checkbox,Button } from '@tarojs/components'
 // import './index.css'
 // import './FloatLayout.scss'
@@ -43,9 +44,25 @@ export default class CartItem extends Component {
     })
   }
 
+  handleDelete = (id)=>{
+    this.props.deleteCartItem(id)
+  }
+
+  handleCheck = (id)=>{
+    const {cartList} = this.props
+    const pick = !cartList.pick
+    return(event)=>[
+      this.props.updateCartItem(id,pick),
+      // this.props.totalprice()
+    ]
+  }
+
+
   render () {
     const flag = this.state.flag
     const isPick = this.state.isPick
+    const {cartList} = this.props
+    const radio = '0'
     const btnActionList=[
       {
         text: '加入\n收藏',
@@ -66,19 +83,20 @@ export default class CartItem extends Component {
         style='height:170px;width:100%;'
         src={thisisgood}
         /> */}
-      <AtSwipeAction maxDistance={120} areaWidth={375} options={btnActionList}>
+      <AtSwipeAction onClick={()=>this.handleDelete(cartList.id)} maxDistance={120} areaWidth={375} options={btnActionList}>
           <View className='good-container'>
-            <Checkbox style={'margin-left:14px'}></Checkbox>
+            <Checkbox style={'margin-left:14px'} checked={cartList.pick} onClick={this.handleCheck(cartList.id)}></Checkbox>
+              {/* 是否选中:{cartList.pick+''} */}
               <Image className='img' onClick={this.toGoodDetails}/>
               <View className='item-info'>
-                <Text className='item-name'>商品名称</Text>
-                <Text className='item-text'>商品描述</Text>
+                <Text className='item-name'>{cartList.name}</Text>
+                <Text className='item-text'>{cartList.detail} </Text>
                 <AtButton className='item-type' size='small' onClick={this.typeInfo}>选择种类</AtButton>
                 <View className='item-info-bottom'>
                   <Text className='item-price'>
                     <Text className='item-price-currency'>￥</Text>
-                    <Text className='item-price-integer'>100</Text>
-                    <Text className='item-price-float'>.00</Text>
+                    <Text className='item-price-integer'>{cartList.priceInt}</Text>
+                    <Text className='item-price-float'>.{cartList.priceFloat}</Text>
                   </Text>
                   <AtInputNumber
                     min={0}

@@ -28,6 +28,8 @@ const config = {
       { from: 'src/components/vant-weapp/dist/goods-action', to: 'dist/components/vant-weapp/dist/goods-action' },
       { from: 'src/components/vant-weapp/dist/goods-action-button', to: 'dist/components/vant-weapp/dist/goods-action-button' },
       { from: 'src/components/vant-weapp/dist/goods-action-icon', to: 'dist/components/vant-weapp/dist/goods-action-icon' },
+      { from: 'src/components/vant-weapp/dist/checkbox', to: 'dist/components/vant-weapp/dist/checkbox' },
+      { from: 'src/components/vant-weapp/dist/checkbox/index.wxs', to: 'dist/components/vant-weapp/dist/checkbox/index.wxs' },
       // { from: 'src/components/vant-weapp/dist/calendar/index.wxs', to: 'dist/components/vant-weapp/dist/calendar/index.wxs' },
       // { from: 'src/components/vant-weapp/dist/calendar/utils.wxs', to: 'dist/components/vant-weapp/dist/calendar/utils.wxs' },
       // { from: 'src/components/vant-weapp/dist/calendar/calendar.wxml', to: 'dist/components/vant-weapp/dist/calendar/calendar.wxml' },

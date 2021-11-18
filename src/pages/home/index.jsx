@@ -11,34 +11,50 @@ import GoodItemB from '../../components/goodItemB'
 
 export default class Home extends Component {
 
-  constructor () {
-    super(...arguments)
-    this.state = {
-      value: ''
+  // constructor () {
+  //   super(...arguments)
+  //   this.state = {
+  //     value: ''
+  //   }
+  // }
+    state = {
+      value: '',
+      courseLists:[
+        {id:'001',name:'Taro文档',intro:'"Taro 是一个开放式跨端跨框架解决方案，支持使用 React 框架来开发微信小程序"',author:'凹凸实验室',stuNum:'192',stage:'第8周'},
+        {id:'002',name:'TypeScript文档',intro:'"TypeScript 是 JavaScript 的一个超集，支持 ECMAScript 6 标准（ES6教程）。"',author:'Microsoft',stuNum:'059',stage:'第1周'},
+      ],
     }
-  }
 
-  onChange (value) {
+  onChange = (value) => { 
     this.setState({
       value: value
     })
+    console.log(value)
   }
-  toCart(){
+  onConfirm = () =>{
+    console.log(this.state.value+' 已提交')
+  }
+  toCart= ()=>{
     Taro.navigateTo({
       url:'/pages/cart/index'
     })
   }
-  toGoodsList(){
+  toGoodsList= ()=>{
     Taro.navigateTo({
       url:'/pages/goodsList/index'
     })
   }
-  toGoodDetails(){
+  toGoodDetails= ()=>{
     Taro.navigateTo({
       url:'/pages/goodDetails/index'
     })
   }
 
+  testNavi=() =>{
+    Taro.navigateTo({
+      url:'/pages/userCard/index'
+    })
+  }
   render () {
     const HomeGirdList = [
       {
@@ -74,6 +90,8 @@ export default class Home extends Component {
         value: '全部课程'
       }
     ]
+    const courseLists = this.state.courseLists
+    var words = this.state.words
     return (
       <View className='home-container'>
         {/* <View style='width:100%;height:900px;background-color: #fff;' > */}
@@ -81,6 +99,8 @@ export default class Home extends Component {
           <AtSearchBar
             value={this.state.value}
             onChange={this.onChange.bind(this)}
+            onConfirm={this.onConfirm}
+            onActionClick={this.onConfirm}
           />
           <Swiper
             className='home-swiper'
@@ -90,7 +110,7 @@ export default class Home extends Component {
             circular
             indicatorDots
             autoplay
-            onClick={this.toGoodDetails}
+            onClick={this.testNavi}
             >
             <SwiperItem>
               <View className='ban1'>
@@ -114,27 +134,13 @@ export default class Home extends Component {
           <View className='homeCategory'>
           <AtGrid columnNum={4} hasBorder={false} data={HomeGirdList} onClick={this.toGoodsList}/>
           </View>
-          {/* <View className='home-lessonlist'>
-            <AtCard
-              note='课程介绍'
-              extra='教师A'
-              title='课程1'
-              thumb='http://www.logoquan.com/upload/list/20180421/logoquan15259400209.PNG'
-            >
-            </AtCard>
-            <AtCard className='card'
-            note='课程介绍'
-            extra='教师B'
-            title='课程2'
-            thumb='http://www.logoquan.com/upload/list/20180421/logoquan15259400209.PNG'
-            >
-            </AtCard>
-          </View> */}
           <View className='home-goodList'>
             <Text className='home-goodList-title'>精选好课</Text>
             <View className='home-goodList-content'>
-              <GoodItemB/>
-              <GoodItemB/>
+            {  
+              courseLists.map((courseList) =>{
+              return <GoodItemB courseList = {courseList}/>
+              })}
             </View>
           </View>
           <AtFab className='tocartFab' onClick={this.toCart}>

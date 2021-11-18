@@ -3,7 +3,9 @@
 }
 .good-container{
   display: flex;
-  width: 100%;
+  // width: 100%;
+  // 将SwiperAction置于pages下
+  width: 750px;
   height: 220px;
   flex-flow: row nowrap;
   align-items: center;

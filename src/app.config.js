@@ -12,6 +12,7 @@ export default {
     'pages/goodsList/index',
     'pages/goodDetails/index',
     'pages/postDetails/index',
+    'pages/userCard/index',
   ],
   window: {
     backgroundTextStyle: 'light',
