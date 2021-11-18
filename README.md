@@ -11,7 +11,7 @@ npm run dev:weapp
 或
 yarn dev:weapp
 
-### 部分预览：
+## 部分页面预览：
 
 ![Snipaste_2021-11-18_21-20-58](https://user-images.githubusercontent.com/81917638/142433097-0a15552f-1901-4590-a969-8394abb0ae0e.jpg)
 ![Snipaste_2021-11-18_21-21-37](https://user-images.githubusercontent.com/81917638/142433116-7c1fa84f-2f9e-49ad-b504-23822ddd2c9b.jpg)
