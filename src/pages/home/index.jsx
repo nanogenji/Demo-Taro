@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import Taro from '@tarojs/taro'
-import { View,Swiper,SwiperItem,Text, Button } from '@tarojs/components'
+import { View,Swiper,SwiperItem,Text, Button,ScrollView } from '@tarojs/components'
 import './index.scss'
 import { AtSearchBar,AtGrid,AtCard,AtFab } from 'taro-ui'
 import banner1 from '../../assets/banner1.jpg'
@@ -20,9 +20,13 @@ export default class Home extends Component {
     state = {
       value: '',
       courseLists:[
-        {id:'001',name:'Taro文档',intro:'"Taro 是一个开放式跨端跨框架解决方案，支持使用 React 框架来开发微信小程序"',author:'凹凸实验室',stuNum:'192',stage:'第8周'},
-        {id:'002',name:'TypeScript文档',intro:'"TypeScript 是 JavaScript 的一个超集，支持 ECMAScript 6 标准（ES6教程）。"',author:'Microsoft',stuNum:'059',stage:'第1周'},
+        {id:'001',title:'Taro文档',intro:'"Taro 是一个开放式跨端跨框架解决方案，支持使用 React 框架来开发微信小程序"',author:'凹凸实验室',priceInt:'100',priceFloat:'49',stuNum:'192',stage:'第8周'},
+        {id:'002',title:'TypeScript文档',intro:'"TypeScript 是 JavaScript 的一个超集，支持 ECMAScript 6 标准（ES6教程）。"',author:'Microsoft',priceInt:'00',priceFloat:'99',stuNum:'059',stage:'第1周'},
+        {id:'003',title:'Node文档',intro:'"Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。"',author:'Ryan Dahl',priceInt:'31',priceFloat:'99',stuNum:'021',stage:'第1周'},
+        {id:'004',title:'Nginx文档',intro:'"Nginx是一个高性能的HTTP和反向代理web服务器，同时也提供了IMAP/POP3/SMTP服务。"',author:'伊戈尔·瑟索耶夫',priceInt:'7',priceFloat:'08',stuNum:'103',stage:'第1周'},
+        {id:'005',title:'React文档',intro:'"用于构建用户界面的 JavaScript 库"',author:'Facebook',priceInt:'00',priceFloat:'00',stuNum:'652',stage:'第1周'},
       ],
+      gaodu:0
     }
 
   onChange = (value) => { 
@@ -52,9 +56,40 @@ export default class Home extends Component {
 
   testNavi=() =>{
     Taro.navigateTo({
-      url:'/pages/userCard/index'
+      url:'/pages/login/index'
     })
   }
+
+  onPullDownRefresh() {
+    console.log('onPullDownRefresh...........')
+
+    // TODO 这里加重新刷新界面的要的操作，比如网络请求
+
+    // 接口请求完毕后隐藏两个loading , 标题和下拉区域
+    setTimeout(()=>{
+      Taro.hideLoading();
+      Taro.stopPullDownRefresh();
+    },1000)
+  }
+
+  //todo:监听页面滑动以改变Fab
+  // onPageScroll(a) {
+  //   const _this = this
+  //   const gaodu = this.state.gaodu
+  //   var flag = 1;
+  //   if(gaodu < a.scrollTop && flag === 1){
+  //     console.log('向下滑动')
+  //     // console.log(gaodu - a.scrollTop)
+  //     flag = 0
+  //   }else if(gaodu > a.scrollTop && flag === 0){
+  //     console.log('向上滑动')
+  //     flag = 1
+  //   }
+  //   setTimeout(function(){
+  //     _this.setState({gaodu:a.scrollTop})
+  //   },300)
+  // }
+
   render () {
     const HomeGirdList = [
       {
@@ -93,7 +128,7 @@ export default class Home extends Component {
     const courseLists = this.state.courseLists
     var words = this.state.words
     return (
-      <View className='home-container'>
+      <ScrollView className='home-container'>
         {/* <View style='width:100%;height:900px;background-color: #fff;' > */}
           {/* <Text className='t1'>首页</Text> */}
           <AtSearchBar
@@ -136,7 +171,7 @@ export default class Home extends Component {
           </View>
           <View className='home-goodList'>
             <Text className='home-goodList-title'>精选好课</Text>
-            <View className='home-goodList-content'>
+            <View enableFlex={true} className='home-goodList-content'>
             {  
               courseLists.map((courseList) =>{
               return <GoodItemB courseList = {courseList}/>
@@ -150,7 +185,7 @@ export default class Home extends Component {
           <AtButton type='primary' onClick = {this.toDetail}>点击跳转</AtButton> */}
         {/* </View> */}
         {/* <Demo /> */}
-      </View>
+      </ScrollView>
     )
   }
 }

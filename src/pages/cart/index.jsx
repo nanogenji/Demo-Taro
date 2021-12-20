@@ -2,9 +2,9 @@ import { Component } from 'react'
 import Taro from '@tarojs/taro'
 import { View,Text, Checkbox, Button, CheckboxGroup } from '@tarojs/components'
 import './index.scss'
-import { AtSwipeAction,AtButton,AtFloatLayout,AtRadio,AtCheckbox  } from 'taro-ui'
+import { AtSwipeAction,AtButton,AtFloatLayout,AtRadio,AtCheckbox,AtToast,AtIcon  } from 'taro-ui'
 import CartItem from '../../components/cartItem'
-import Test from '../../components/test'
+// import Test from '../../components/test'
 
 export default class Cart extends Component {
   constructor(props){
@@ -14,10 +14,13 @@ export default class Cart extends Component {
       value: 'option1',
       // pickCount:0,
       total:0,
+      toastOpen:false,
+      submitDisabled:true,
+      checkAlldisable:false,
       cartLists: [
         {id:'001',name:'Taro入门',detail:'入门详情',priceInt:'123',priceFloat:'50',pick:false},
         {id:'002',name:'Taro实战',detail:'实战详情',priceInt:'321',priceFloat:'99',pick:false},
-        {id:'003',name:'Taro放弃',detail:'忘了我吧',priceInt:'0',priceFloat:'00',pick:false},
+        {id:'003',name:'Taro放弃',detail:'忘了我吧',priceInt:'0',priceFloat:'01',pick:false},
       ]
     }
     this.addressChange = this.addressChange.bind(this)
@@ -34,7 +37,17 @@ export default class Cart extends Component {
     console.log("cart-flag:",flag)
   }
   onSub =()=>{
-    console.log('提交成功')
+    const total = this.state.total
+    // const cartLists = this.state.cartLists
+    // const 
+    // const newCartLists = cartLists.map((cartListObj)=>{
+    //   if(cartListObj.pick === true){
+    //   }
+    // })
+    // console.log('提交成功,本次订单共：' + total / 100 + '元')
+    // return <AtToast isOpened text={'提交成功,本次订单共：' + total / 100 + '元'} status={"success"} ></AtToast>
+    const toastOpen = this.state.toastOpen
+    this.setState({toastOpen:!toastOpen})
   }
 
   //地址
@@ -48,10 +61,21 @@ export default class Cart extends Component {
 
   deleteCartItem =(id)=>{
     const cartLists = this.state.cartLists
+    const checkAlldisable = this.state.checkAlldisable
+    let newCheckAlldisable = true
+    let cartListLength = cartLists.length
     const newCartLists = cartLists.filter((cartListObj)=>{
       return cartListObj.id !== id
     })
-    this.setState({cartLists:newCartLists})
+    //调用完length才为0
+    if(cartListLength === 1){
+      newCheckAlldisable = true
+    }
+    else{
+      newCheckAlldisable = false
+    }
+    console.log(newCheckAlldisable)
+    this.setState({cartLists:newCartLists,checkAlldisable:newCheckAlldisable})
   }
 
   // addCartItem = (cartListObj) =>{
@@ -73,9 +97,11 @@ export default class Cart extends Component {
   updateCartItem = (id,pick)=>{
     const cartLists = this.state.cartLists
     const total = this.state.total
+    const submitDisabled = this.state.submitDisabled
     let totalInt = 0
     let totalFloat = 0
     let temp = 0
+    let newSubmitDisabled = true
     //update
     const newCartLists = cartLists.map((cartListObj)=>{
       if(cartListObj.id === id) return {...cartListObj,pick:pick}
@@ -84,6 +110,7 @@ export default class Cart extends Component {
     //total
     newCartLists.map((newCartListObj)=>{
       if(newCartListObj.pick === true){
+        newSubmitDisabled = false
         totalInt += parseInt(newCartListObj.priceInt)
         totalFloat += parseInt(newCartListObj.priceFloat)
       }
@@ -92,14 +119,18 @@ export default class Cart extends Component {
       let carry = totalFloat
       totalFloat -= 100 * parseInt(carry / 100)
       totalInt += parseInt(carry / 100)
-
-
       // console.log('carry:'+parseInt(carry / 100))
       // console.log('totalInt'+totalInt)
+      // console.log('totalFloat' + totalFloat)
     }
-    temp = parseInt('' + totalInt + totalFloat)
-    this.setState({total:temp,cartLists:newCartLists})
+    temp = parseInt('' + totalInt + (totalFloat === 0 ? '00' : totalFloat))//totalFloat为0时补一位
+    //submitdisable
+    console.log(newSubmitDisabled)
+
+    //checkdisable
+    this.setState({total:temp,cartLists:newCartLists,submitDisabled:newSubmitDisabled})
   }
+
   checkAll = (event)=>{
     let flag = false
     const total = this.state.total
@@ -107,8 +138,11 @@ export default class Cart extends Component {
     let totalFloat = 0
     let temp = 0
     const cartLists = this.state.cartLists
+    const submitDisabled = this.state.submitDisabled
+    let newSubmitDisabled = true
     if(event.detail.value.length === 1){
       flag = true
+      newSubmitDisabled = false
     }
     else flag = false
     const newCartLists = cartLists.map((cartListObj)=>{
@@ -126,26 +160,32 @@ export default class Cart extends Component {
       let carry = totalFloat
       totalFloat -= 100 * parseInt(carry / 100)
       totalInt += parseInt(carry / 100)
-
-
       // console.log('carry:'+parseInt(carry / 100))
       // console.log('totalInt'+totalInt)
     }
     temp = parseInt('' + totalInt + totalFloat)
-    this.setState({total:temp,cartLists:newCartLists})
+    this.setState({total:temp,cartLists:newCartLists,submitDisabled:newSubmitDisabled})
     console.log('全选判定'+event.detail.value.length)
   }
-  checkAlldisable = ()=>{
-    let flag = 0
-    const cartLists = this.state.cartLists
-    cartLists.map((cartListObj)=>{
-      if(cartListObj.pick === true)
-      {
-        flag += 1
-      }
-      return flag === 0 ? true : false
-    })
+  
+  onToastClosed = () =>{
+    const toastOpen = this.state.toastOpen
+    this.setState({toastOpen:false})
   }
+  //全选禁用
+  // checkAlldisable = ()=>{
+  //   let flag = 0
+  //   const cartLists = this.state.cartLists
+  //   cartLists.map((cartListObj)=>{
+  //     if(cartListObj.pick === true)
+  //     {
+  //       flag += 1
+  //     }
+  //     return flag === 0 ? true : false
+  //   })
+  // }
+
+
   // totalprice = ()=>{
   //   const cartLists = this.state.cartLists
   //   let totalInt = 0
@@ -166,10 +206,41 @@ export default class Cart extends Component {
   //   this.setState({total:temp})
   // }
 
+  //submitdisabled
+  // componentDidUpdate = ()=>{
+  //   const submitDisabled = this.state.submitDisabled
+  //   const cartLists = this.state.cartLists
+  //   let newSubmitDisabled = true
+  //   cartLists.map((cartListObj)=>{
+  //     if(cartListObj.pick === true){
+  //       newSubmitDisabled = false
+  //       // this.setState({submitDisabled:newSubmitDisabled})
+  //     }
+  //   })
+  //   // console.log(newSubmitDisabled)
+  // }
+
+  componentDidMount=()=>{
+    const checkAlldisable = this.state.checkAlldisable
+    const cartLists = this.state.cartLists
+    let newCheckAlldisable = false
+    let cartListLength = cartLists.length
+    if(cartListLength === 0){
+      newCheckAlldisable = true
+    }
+    else{
+      newCheckAlldisable = false
+    }
+    this.setState({checkAlldisable:newCheckAlldisable})
+  }
+  
   render () {
     const flag = this.state.flag
     const cartLists = this.state.cartLists
     const total = this.state.total
+    const toastOpen = this.state.toastOpen
+    const submitDisabled = this.state.submitDisabled
+    const checkAlldisable = this.state.checkAlldisable
     // cosnt pickCount = cartLists.reduce((pre,current)=>{return pre + (current.pick ? 1:0)},0)
     const btnActionList=[
       {
@@ -185,8 +256,6 @@ export default class Cart extends Component {
       }
     }
   ]
-  console.log(cartLists)
-  console.log()
     return (
       <View>
         <View className='cart-header'>
@@ -213,18 +282,15 @@ export default class Cart extends Component {
           price={total}
           buttonText='提交订单'
           onSubmit={this.onSub.bind(this)}
+          disabled={submitDisabled}
         >
           <CheckboxGroup onChange={this.checkAll}>
             <Checkbox 
-              disabled={this.checkAlldisable} checked={(cartLists.reduce((pre,current)=>{ return pre + (current.pick ? 1:0)},0) === cartLists.length && cartLists.length !== 0) ? true:false}
-              >
+                checked={(cartLists.reduce((pre,current)=>{ return pre + (current.pick ? 1:0)},0) === cartLists.length && cartLists.length !== 0) ? true:false}
+                disabled={checkAlldisable}
+            >
             </Checkbox>
           </CheckboxGroup>
-          {/* <Checkbox 
-            ref='checkbox1'
-            checked={(cartLists.reduce((pre,current)=>{ return pre + (current.pick ? 1:0)},0) === cartLists.length && cartLists.length !== 0) ? true:false}
-            onClick={this.checkAll}>
-          </Checkbox> */}
           <Text>已选{cartLists.reduce((pre,current)=>{return pre + (current.pick ? 1:0)},0)}/总共{cartLists.length}</Text>
         </van-submit-bar>
         <View className='emptySupport'></View>
@@ -253,6 +319,7 @@ export default class Cart extends Component {
             <AtButton type='primary' size='normal' circle className='layout-confirm' onClick={this.handleClose.bind(this)}>确认</AtButton>
           </View>
       </AtFloatLayout>
+      <AtToast isOpened={toastOpen} text={'提交成功,本次订单共：' + total / 100 + '元'} duration={1000} status={"success"} onClose={this.onToastClosed} ></AtToast>
       </View>
     )
   }

@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import Taro from '@tarojs/taro'
 import { View,Text } from '@tarojs/components'
-import './index.css'
+import './index.scss'
 import { AtAvatar,AtGrid,AtListItem } from 'taro-ui'
 import Ava from '../../assets/user.png'
 
@@ -11,6 +11,12 @@ export default class Profile extends Component {
   toSettings(){
     Taro.navigateTo({
       url:'/pages/settings/index'
+    })
+  }
+
+  toOrderList(){
+    Taro.navigateTo({
+      url:'/pages/orderList/index'
     })
   }
 
@@ -88,27 +94,30 @@ export default class Profile extends Component {
       },
     ];
     return (
-      <View >
-        <View style='width:100%;height:900px;background-color: #FAFBFC;'>
+        <View>
           <View className='header'>
-            <AtAvatar className='user' circle image={Ava}></AtAvatar>
-            <Text className='name'>Username</Text>
-            <Text className='email'>A********z@gmail.com</Text>
+            <AtAvatar className='userAva' circle image={Ava}></AtAvatar>
+            <View className='user-info'>
+              <Text className='name'>Username</Text>
+              <Text className='email'>A********z@gmail.com</Text>
+            </View>
           </View>
           <AtGrid className='core' mode='rect' hasBorder={false} data={gridList} />
             <View className='order'>
-              <AtListItem title='我的订单'extraText='查看全部订单' arrow='right' />
-              <AtGrid columnNum={4}  hasBorder={false} data={orderActionList} />
+              <AtListItem title='我的订单'extraText='查看全部订单' arrow='right' onClick={this.toOrderList} />
+              <AtGrid className='order-action' columnNum={4}  hasBorder={false} data={orderActionList} />
             </View>
-            <View className='event'>
+            {/* <View className='event'>
               <AtGrid columnNum={4} mode='rect' hasBorder={false} data={gridList2} />
-            </View>
+            </View> */}
             <View className='end'>
-              <AtListItem title='关于' onClick = {this.Info} arrow='right' />
-              <AtListItem title='设置' onClick = {this.toSettings} arrow='right' />
+              <AtListItem hasBorder={false} iconInfo={{size:25,value:'calendar',color:'#90a4ae'}} title='学习进度' onClick = {this.Info} arrow='right' />
+              <AtListItem hasBorder={false} iconInfo={{size:25,value:'eye',color:'#90a4ae'}} title='活动广场' onClick = {this.Info} arrow='right' />
+              <AtListItem hasBorder={false} iconInfo={{size:25,value:'help',color:'#90a4ae'}} title='帮助与反馈' onClick = {this.Info} arrow='right' />
+              <AtListItem hasBorder={false} iconInfo={{size:25,value:'menu',color:'#90a4ae'}} title='关于' onClick = {this.Info} arrow='right' />
+              <AtListItem hasBorder={false} iconInfo={{size:25,value:'settings',color:'#90a4ae'}} title='设置' onClick = {this.toSettings} arrow='right' />
             </View>
         </View>
-      </View>
     )
   }
 }

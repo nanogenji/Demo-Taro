@@ -1,36 +1,37 @@
-.at-article__h3{
-  padding-top: 20px;
-}
-
-.at-article__info{
-  padding-bottom: 20px;
-}
-
-// .article-img{
-//   display: flex;
-//   width: 240px;
-//   height: 150px;
-//   background-color: #e0e0e0;
-// }
-
 .oneArticle{
-  height: 200px;
+  height: 250px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   margin-top: 20px;
   margin-bottom: 10px;
+  background-color: white;
   .img{
     display: flex;
-    width: 240px;
-    height: 150px;
+    width: 290px;
+    height: 180px;
     background-color: #e0e0e0;
+    margin-right: 20px;
+    border-radius: 0.4em;
   }
   .text{
-    height: 200px;
+    height: 240px;
+    width: 440px;
     display: flex;
     flex-flow: column nowrap;
-    justify-content: space-between;
+    justify-content: space-around;
+    .text-title{
+      margin: 0 30px;
+      color: #333;
+      font-size: 32px;
+      line-height: 48px;
+    }
+    .text-info{
+      margin: 0 30px;
+      color: #ccc;
+      font-size: 28px;
+      line-height: 42px;
+    }
   }
 }
 

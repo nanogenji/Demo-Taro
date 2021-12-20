@@ -4,14 +4,13 @@ import { View, Text } from '@tarojs/components'
 import './index.scss'
 import { AtInput, AtForm,AtTextarea,AtImagePicker, AtButton,AtMessage    } from 'taro-ui'
 
-export default class CreatePost extends Component {
+export default class CreateArticle extends Component {
 
   constructor () {
     super(...arguments)
     this.state = {
       value: '',
-      files: [
-        {
+      files: [{
         url: 'https://images.unsplash.com/photo-1531804055935-76f44d7c3621?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=688&q=80',
       },
       {
@@ -19,8 +18,7 @@ export default class CreatePost extends Component {
       },
       {
         url: 'https://images.unsplash.com/photo-1634567044367-b6b18bfec7ba?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=690&q=80',
-      }
-    ]
+      }]
     }
   }
   handleChange (value) {
@@ -58,7 +56,7 @@ export default class CreatePost extends Component {
       <View>
         <AtMessage />
         <AtForm>
-          {/* <AtInput
+          <AtInput
             className="title"
             name="title"
             title="添加标题"
@@ -66,19 +64,17 @@ export default class CreatePost extends Component {
             placeholder="加个标题"
             value={this.state.value}
             onChange={this.handleChange.bind(this)}
-          /> */}
-
+          />
           <AtTextarea
             className="content"
             value={this.state.value}
             // onChange={this.handleChange.bind(this)}
             maxLength={200}
-            placeholder='尽情发挥吧'
             height={450}
+            placeholder='尽情发挥吧'
           />
         </AtForm>
         <AtImagePicker
-          className = 'imgPicker'
           files={this.state.files}
           onChange={this.onChange2.bind(this)}
         />

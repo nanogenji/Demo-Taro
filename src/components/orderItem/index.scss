@@ -1,0 +1,95 @@
+.orderItem-container{
+  width: 700px;
+  height: 340px;
+  display: flex;
+  flex-flow: column nowrap;
+  background-color: white;
+  border-radius: 0.6em;
+  margin-top: 40px;
+  .orderItem-header{
+    width: 750px;
+    height: 100px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    .orderItem-shopImg{
+      width: 50px;
+      height: 50px;
+      margin-left: 20px;
+      background-color: #ffcdd2;
+      border-radius: 0.3rem;
+    }
+    .orderItem-shopName{
+      margin-left: 20px;
+      font-weight: 600;
+    }
+    .orderItem-arrow{
+      margin-left: 20px;
+    }
+  }
+  .orderItem-content{
+    display: flex;
+    flex-flow: row nowrap;
+    width: 700px;
+    height: 220px;
+    align-items: center;
+    justify-content: space-evenly;
+    .orderItem-goodImg{
+      width: 190px;
+      height: 190px;
+      background-color: #c5e1a5;
+      border-radius: 0.3rem;
+    }
+    .orderItem-content-right{
+      width: 460px;
+      height: 190px;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: space-around;
+      .orderItem-content-right-info{
+        display: flex;
+        flex-flow: row nowrap;
+        .orderItem-goodName{
+          width: 250px;
+          margin-left: 30px;
+        }
+        .orderItem-price{
+          color: #f52443;
+          margin-left: 35px;
+          .orderItem-price-currency{
+            font-size: 24px;
+          }
+          .orderItem-price-integer{
+            font-size: 40px;
+          }
+          .orderItem-price-float{
+            font-size: 24px;
+          }
+        }
+      }
+      .orderItem-right-footer{
+        display: flex;
+        flex-flow: row nowrap;
+        margin-top: 26px;
+        .btn1{
+          width: 180px;
+          height: 70px;
+          font-size: 28px;
+          border-radius: 40px;
+          text-align: center;
+          background-color: #fff;
+          // border-style: solid;
+          // border-width: 1px;
+          // border-color: #b0bec5;
+          box-shadow: 0 0 2px rgba(0, 0, 0, 0.23), 0 0 2px rgba(0, 0, 0, 0.16);
+        }
+        .btn2{
+          @extend .btn1;
+          color: #4dd0e1;
+          // border-color: #4dd0e1;
+          box-shadow: 0 0 2px #4dd0e1, 0 0 2px #4dd0e1;
+        }
+      }
+    }
+  }
+}

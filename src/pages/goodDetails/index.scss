@@ -34,10 +34,19 @@
         color: #9e9e9e;
       }
       .goodDetails-header-price{
-        font-size: 42px;
+        font-size: 44px;
         margin-top: 40px;
         margin-left: 50px;
-        color: red;
+        color: #f52443;
+        .goodDetails-header-price-currency{
+          font-size: 28px;
+        }
+        .goodDetails-header-price-integer{
+          font-size: 44px;
+        }
+        .goodDetails-header-price-float{
+          font-size: 30px;
+        }
       }
     }
     .goodDetails-author{
@@ -64,6 +73,10 @@
           display: flex;
           flex-flow: column nowrap;
           justify-content: space-between;
+          .goodDetails-author-title{
+            color: #9e9e9e;
+            font-size: 30px;
+          }
         }
       }
     }

@@ -1,0 +1,39 @@
+.header{
+  height:250px;
+  background-color: aqua;
+  border-bottom-right-radius:5em;
+  border-bottom-left-radius:5em;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  .userAva{
+    margin-top: 50px;
+    margin-left: 90px;
+  }
+  .user-info{
+    height: 100px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    margin-top: 50px;
+    margin-left: 20px;
+  }
+}
+
+.order{
+  height:300px;
+  /* background-color: aqua; */
+  margin-top: 20px;
+  .order-action{
+    height: 150px;
+  }
+}
+
+.event{
+  height:270px;
+  /* background-color: aqua; */
+  margin-top: 20px;
+}
+.end{
+  margin-top: 30px;
+}

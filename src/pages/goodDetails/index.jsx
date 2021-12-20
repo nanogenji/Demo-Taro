@@ -1,17 +1,19 @@
 import { Component } from 'react'
-import Taro from '@tarojs/taro'
+import Taro,{ getCurrentInstance,Current } from '@tarojs/taro'
 import { View,Text,Image } from '@tarojs/components'
 import './index.scss'
 import { AtAvatar,AtTabs, AtTabsPane,AtToast,AtAccordion,AtList,AtListItem } from 'taro-ui'
 import Ava from '../../assets/user.png'
 
 export default class GoodDetails extends Component {
+  $instance = getCurrentInstance()
   constructor (props) {
     super(props)
     this.state = {
       current: 0,
       flag:false,
       open: true,
+      // courseList:this.$instance.router.params.test
     }
     this.openToast = this.openToast.bind(this)
   }
@@ -47,10 +49,16 @@ export default class GoodDetails extends Component {
     // const cartListObj = {id:date + '' + rund,name:'Taro文档',detail:'',priceInt:'100',priceFloat:'00'}
     // this.props.add(cartListObj)
   }
+
+  componentDidMount(){
+    const courseList = JSON.parse(decodeURI(Current.router.params.courseList))
+    console.log(courseList)
+  }
   render () {
     const flag = this.state.flag
     const tabList = [{ title: '介绍' }, { title: '目录' }, { title: '评价' }]
     const open = this.state.open
+    const courseList = JSON.parse(decodeURI(Current.router.params.courseList))
     return (
       <View className='goodDetails-container'>
         <Image className='goodDetails-img'/>
@@ -58,17 +66,21 @@ export default class GoodDetails extends Component {
         <AtTabsPane current={this.state.current} index={0} >
           <View className='goodDetails-intro'>
             <View className='goodDetails-header'>
-              <Text className='goodDetails-header-title'>Taro文档</Text>
-              <Text className='goodDetails-header-student'>已有xxx人参加</Text>
+              <Text className='goodDetails-header-title'>{courseList.title}</Text>
+              <Text className='goodDetails-header-student'>{'已有'+ courseList.stuNum +'人参加'}</Text>
               <Text className='goodDetails-header-time'>2021年10月01日-2021年11月30日</Text>
-              <Text className='goodDetails-header-price'>￥100.00</Text>
+              <Text className='goodDetails-header-price'>
+                <Text className='goodDetails-header-price-currency'>￥</Text>
+                <Text className='goodDetails-header-price-integer'>{courseList.priceInt}</Text>
+                <Text className='goodDetails-header-price-float'>.{courseList.priceFloat}</Text>
+              </Text>
             </View>
             <View className='goodDetails-author'>
-              <Text className='goodDetails-author-header'>授课教师</Text>
+              <Text className='goodDetails-author-header'>授课方</Text>
               <View className='goodDetails-author-content'>
                 <AtAvatar circle image={Ava} className='goodDetails-author-icon'/>
                 <View className='goodDetails-author-info'>
-                  <Text className='goodDetails-author-name'>A老师</Text>
+                  <Text className='goodDetails-author-name'>{courseList.author}</Text>
                   <Text className='goodDetails-author-title'>20年专业解读文档</Text>
                 </View>
               </View>

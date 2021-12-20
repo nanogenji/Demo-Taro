@@ -30,9 +30,28 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    .goodItemB-author{
-      font-size: 28px;
-      color: #9e9e9e;
+    .goodItemB-authorAndPrice{
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      .goodItemB-author{
+        font-size: 28px;
+        color: #9e9e9e;
+      }
+      .goodItemB-price{
+        color: #f52443;
+        margin-right: 20px;
+        .goodItemB-price-currency{
+          font-size: 24px;
+        }
+        .goodItemB-price-integer{
+          font-size: 40px;
+        }
+        .goodItemB-price-float{
+          font-size: 24px;
+        }
+      }
     }
     .goodItemB-lesson{
       display: flex;

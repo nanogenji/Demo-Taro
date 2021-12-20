@@ -1,7 +1,8 @@
 import Taro,{ Component } from 'react'
-import './app.css'
+// import './app.css'
 import 'taro-ui/dist/style/index.scss'
-
+// import '../src/basisStyle/taro-ui.css'
+import '../src/basisStyle/custom-theme.scss'
 class App extends Component {
 
   componentDidMount () {}

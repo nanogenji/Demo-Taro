@@ -44,7 +44,8 @@ export default class CartItem extends Component {
     })
   }
 
-  handleDelete = (id)=>{
+  handleDelete = (id,btnActionList)=>{
+    console.log(btnActionList)
     this.props.deleteCartItem(id)
   }
 
@@ -65,12 +66,14 @@ export default class CartItem extends Component {
     const radio = '0'
     const btnActionList=[
       {
+        id:1,
         text: '加入\n收藏',
         style: {
           backgroundColor: '#6190E8'
         }
       },
     {
+      id:2,
       text: '删除',
       style: {
         backgroundColor: '#FF4949'

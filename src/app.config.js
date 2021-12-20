@@ -13,12 +13,18 @@ export default {
     'pages/goodDetails/index',
     'pages/postDetails/index',
     'pages/userCard/index',
+    'pages/createArticle/index',
+    'pages/orderList/index',
+    'pages/login/index',
   ],
   window: {
     backgroundTextStyle: 'light',
-    navigationBarBackgroundColor: '#6190e8',
+    // navigationBarBackgroundColor: '#6190e8',
+    navigationBarBackgroundColor: '#3f80dd',
     navigationBarTitleText: 'WeChat',
-    navigationBarTextStyle: 'black'
+    navigationBarTextStyle: 'black',
+    // enablePullDownRefresh: true,
+    // backgroundTextStyle: "dark"
   },
   tabBar: {
     custom:false,

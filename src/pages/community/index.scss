@@ -15,10 +15,14 @@
   width: 700px;
   height: 300px;
 }
-.community-container{
+.post-container{
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-evenly;
   align-items: center;
   margin-top: 10px;
+}
+.article-container{
+  min-height: 1450px;
+  background-color: white;
 }
