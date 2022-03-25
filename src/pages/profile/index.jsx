@@ -112,7 +112,7 @@ export default class Profile extends Component {
             </View> */}
             <View className='end'>
               <AtListItem hasBorder={false} iconInfo={{size:25,value:'calendar',color:'#90a4ae'}} title='学习进度' onClick = {this.Info} arrow='right' />
-              <AtListItem hasBorder={false} iconInfo={{size:25,value:'eye',color:'#90a4ae'}} title='活动广场' onClick = {this.Info} arrow='right' />
+              <AtListItem hasBorder={false} iconInfo={{size:25,value:'eye',color:'#90a4ae'}} title='职业测试' onClick = {this.Info} arrow='right' />
               <AtListItem hasBorder={false} iconInfo={{size:25,value:'help',color:'#90a4ae'}} title='帮助与反馈' onClick = {this.Info} arrow='right' />
               <AtListItem hasBorder={false} iconInfo={{size:25,value:'menu',color:'#90a4ae'}} title='关于' onClick = {this.Info} arrow='right' />
               <AtListItem hasBorder={false} iconInfo={{size:25,value:'settings',color:'#90a4ae'}} title='设置' onClick = {this.toSettings} arrow='right' />

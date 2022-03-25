@@ -8,9 +8,11 @@ import banner2 from '../../assets/banner2.jpg'
 import banner3 from '../../assets/banner3.jpg'
 import { useState } from 'react'
 import GoodItemB from '../../components/goodItemB'
-
+import Msg from '../../components/msg'
+import Bomb from '../../value/bomb'
+// import Bmob from '../../assets/js/Bmob-2.2.4.min.js'
+let db = new Bomb({sercretKey:"8a7e35df0e10c1ec", apiSafeCode:"000419"});
 export default class Home extends Component {
-
   // constructor () {
   //   super(...arguments)
   //   this.state = {
@@ -20,12 +22,22 @@ export default class Home extends Component {
     state = {
       value: '',
       courseLists:[
-        {id:'001',title:'Taro文档',intro:'"Taro 是一个开放式跨端跨框架解决方案，支持使用 React 框架来开发微信小程序"',author:'凹凸实验室',priceInt:'100',priceFloat:'49',stuNum:'192',stage:'第8周'},
-        {id:'002',title:'TypeScript文档',intro:'"TypeScript 是 JavaScript 的一个超集，支持 ECMAScript 6 标准（ES6教程）。"',author:'Microsoft',priceInt:'00',priceFloat:'99',stuNum:'059',stage:'第1周'},
-        {id:'003',title:'Node文档',intro:'"Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。"',author:'Ryan Dahl',priceInt:'31',priceFloat:'99',stuNum:'021',stage:'第1周'},
-        {id:'004',title:'Nginx文档',intro:'"Nginx是一个高性能的HTTP和反向代理web服务器，同时也提供了IMAP/POP3/SMTP服务。"',author:'伊戈尔·瑟索耶夫',priceInt:'7',priceFloat:'08',stuNum:'103',stage:'第1周'},
-        {id:'005',title:'React文档',intro:'"用于构建用户界面的 JavaScript 库"',author:'Facebook',priceInt:'00',priceFloat:'00',stuNum:'652',stage:'第1周'},
+        {
+          id:'001',
+          title:'Taro文档',
+          intro:'"Taro 是一个开放式跨端跨框架解决方案，支持使用 React 框架来开发微信小程序"',
+          producer:'凹凸实验室',
+          priceInt:'100',
+          priceFloat:'49',
+          student:'192',
+          stage:'第8周'
+      },
+        {id:'002',title:'TypeScript文档',intro:'"TypeScript 是 JavaScript 的一个超集，支持 ECMAScript 6 标准（ES6教程）。"',producer:'Microsoft',priceInt:'00',priceFloat:'99',student:'059',stage:'第1周'},
+        {id:'003',title:'Node文档',intro:'"Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。"',producer:'Ryan Dahl',priceInt:'31',priceFloat:'99',student:'021',stage:'第1周'},
+        {id:'004',title:'Nginx文档',intro:'"Nginx是一个高性能的HTTP和反向代理web服务器，同时也提供了IMAP/POP3/SMTP服务。"',producer:'伊戈尔·瑟索耶夫',priceInt:'7',priceFloat:'08',student:'103',stage:'第1周'},
+        {id:'005',title:'React文档',intro:'"用于构建用户界面的 JavaScript 库"',producer:'Facebook',priceInt:'00',priceFloat:'00',student:'652',stage:'第1周'},
       ],
+      testLists:[],
       gaodu:0
     }
 
@@ -55,9 +67,13 @@ export default class Home extends Component {
   }
 
   testNavi=() =>{
-    Taro.navigateTo({
-      url:'/pages/login/index'
-    })
+    // Taro.navigateTo({
+    //   url:'/pages/login/index'
+    // })
+    const courseLists = this.state.courseLists
+    const testLists = this.state.testLists
+    // console.log(courseLists)
+    console.log(testLists)
   }
 
   onPullDownRefresh() {
@@ -90,6 +106,25 @@ export default class Home extends Component {
   //   },300)
   // }
 
+  componentWillMount(){
+    db.getAll('goods').then((value) => {
+        this.setState({testLists:value})
+    })
+  }
+
+  loadcomponent=()=>{
+    const testLists = this.state.testLists
+
+    if(testLists instanceof Object){
+      testLists.map((courseList) =>{
+        // return <GoodItemB courseList = {courseList}/>
+        })
+      // return <GoodItemB courseList = {testLists[0]}/>
+    }
+    else{
+      console.log('还没加载好')
+    }
+  }
   render () {
     const HomeGirdList = [
       {
@@ -126,6 +161,7 @@ export default class Home extends Component {
       }
     ]
     const courseLists = this.state.courseLists
+    const testLists = this.state.testLists
     var words = this.state.words
     return (
       <ScrollView className='home-container'>
@@ -173,7 +209,7 @@ export default class Home extends Component {
             <Text className='home-goodList-title'>精选好课</Text>
             <View enableFlex={true} className='home-goodList-content'>
             {  
-              courseLists.map((courseList) =>{
+              testLists.map((courseList) =>{
               return <GoodItemB courseList = {courseList}/>
               })}
             </View>

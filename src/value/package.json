@@ -1,0 +1,16 @@
+{
+  "name": "value",
+  "version": "1.0.0",
+  "main": "bomb.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "hydrogen-js-sdk": "^2.2.51"
+  }
+}

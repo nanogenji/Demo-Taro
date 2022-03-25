@@ -1,9 +1,11 @@
 import { Component } from 'react'
 import Taro,{ getCurrentInstance,Current } from '@tarojs/taro'
-import { View,Text,Image } from '@tarojs/components'
+import { View,Text,Image, ScrollView } from '@tarojs/components'
 import './index.scss'
 import { AtAvatar,AtTabs, AtTabsPane,AtToast,AtAccordion,AtList,AtListItem } from 'taro-ui'
 import Ava from '../../assets/user.png'
+import Bomb from '../../value/bomb'
+let db = new Bomb({sercretKey:"8a7e35df0e10c1ec", apiSafeCode:"000419"});
 
 export default class GoodDetails extends Component {
   $instance = getCurrentInstance()
@@ -13,7 +15,8 @@ export default class GoodDetails extends Component {
       current: 0,
       flag:false,
       open: true,
-      // courseList:this.$instance.router.params.test
+      courseList:[],
+      startTime:''
     }
     this.openToast = this.openToast.bind(this)
   }
@@ -50,25 +53,46 @@ export default class GoodDetails extends Component {
     // this.props.add(cartListObj)
   }
 
-  componentDidMount(){
-    const courseList = JSON.parse(decodeURI(Current.router.params.courseList))
-    console.log(courseList)
+  //无后端
+  // componentDidMount(){
+  //   const courseList = JSON.parse(decodeURI(Current.router.params.courseList))
+  //   console.log(courseList)
+  // }
+
+  componentWillMount(){
+    const id = Current.router.params.id
+    db.get_('goods',id).then((value) => {
+      this.setState({courseList:value})
+  })
   }
+
+  //截取ymd
+  getDate=(date)=>{
+    var ans = ''
+    if(date !== undefined){
+      var a = date.indexOf(' ')
+      ans = date.slice(0,a)
+    }
+    return ans
+  }
+  
   render () {
     const flag = this.state.flag
     const tabList = [{ title: '介绍' }, { title: '目录' }, { title: '评价' }]
-    const open = this.state.open
-    const courseList = JSON.parse(decodeURI(Current.router.params.courseList))
+    // const courseList = JSON.parse(decodeURI(Current.router.params.courseList))
+    const courseList = this.state.courseList
+    const startTime = this.getDate(courseList.createdAt)
+    const endTime = this.getDate(courseList.updatedAt)
     return (
-      <View className='goodDetails-container'>
+      <View enableFlex={true} className='goodDetails-container'>
         <Image className='goodDetails-img'/>
         <AtTabs current={this.state.current} tabList={tabList} onClick={this.handleClick.bind(this)}>
         <AtTabsPane current={this.state.current} index={0} >
-          <View className='goodDetails-intro'>
+          <ScrollView enableFlex={true} className='goodDetails-intro'>
             <View className='goodDetails-header'>
               <Text className='goodDetails-header-title'>{courseList.title}</Text>
-              <Text className='goodDetails-header-student'>{'已有'+ courseList.stuNum +'人参加'}</Text>
-              <Text className='goodDetails-header-time'>2021年10月01日-2021年11月30日</Text>
+              <Text className='goodDetails-header-student'>{'已有'+ courseList.student +'人参加'}</Text>
+              <Text className='goodDetails-header-time'>{startTime}-{endTime}</Text>
               <Text className='goodDetails-header-price'>
                 <Text className='goodDetails-header-price-currency'>￥</Text>
                 <Text className='goodDetails-header-price-integer'>{courseList.priceInt}</Text>
@@ -80,12 +104,13 @@ export default class GoodDetails extends Component {
               <View className='goodDetails-author-content'>
                 <AtAvatar circle image={Ava} className='goodDetails-author-icon'/>
                 <View className='goodDetails-author-info'>
-                  <Text className='goodDetails-author-name'>{courseList.author}</Text>
-                  <Text className='goodDetails-author-title'>20年专业解读文档</Text>
+                  <Text className='goodDetails-author-name'>{courseList.producer}</Text>
+                  {/* <Text className='goodDetails-author-title'>20年专业解读文档</Text> */}
+                  <Text className='goodDetails-author-title'>{courseList.salerDetail}</Text>
                 </View>
               </View>
-          </View>
-          </View>
+            </View>
+          </ScrollView>
         </AtTabsPane>
         <AtTabsPane current={this.state.current} index={1}>
           <View className='goodDetails-directory'>
@@ -122,15 +147,7 @@ export default class GoodDetails extends Component {
           <View className='goodDetails-reviews'>还没有人评价该课程</View>
         </AtTabsPane>
       </AtTabs>
-
-      {/* <View className='goodDetails-footer'>
-        <AtIcon className='goodDetails-footer-icon' value='heart' size='30' color='#dedede'></AtIcon>
-        <View className='goodDetails-footer-btn'>
-          <AtButton circle type='primary' className='goodDetails-footer-tocartBtn' onClick={this.openToast}>加入购物车</AtButton>
-          <AtButton circle type='primary' className='goodDetails-footer-buyBtn' onClick={this.openToast}>立即参加</AtButton>
-        </View>
-      </View> */}
-
+      <View className='emptyView'></View>
       <van-goods-action>
         <van-goods-action-icon icon="like-o" text="收藏" onClick="onClickIcon" />
         <van-goods-action-icon icon="cart-o" text="购物车" onClick={this.toCart} />

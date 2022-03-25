@@ -1,11 +1,14 @@
 import { Component } from 'react'
-import Taro from '@tarojs/taro'
+import Taro, { Current } from '@tarojs/taro'
 import { View,Text,Image, ScrollView } from '@tarojs/components'
 import './index.scss'
 import { AtAvatar,AtIcon,AtFab,AtTabs, AtTabsPane } from 'taro-ui'
 import Ava from '../../assets/user.png'
 import OnePost from '../../components/onePost'
 import OneAtricle from '../../components/oneArticle'
+import Bomb from '../../value/bomb'
+let db = new Bomb({sercretKey:"8a7e35df0e10c1ec", apiSafeCode:"000419"});
+
 export default class Community extends Component {
   state = {
     current: 0,
@@ -82,7 +85,9 @@ export default class Community extends Component {
         
         `
       },
-    ]
+    ],
+    postListObj:'',
+    testLists:[]
   }
 
   handleClick = (value)=> {
@@ -109,11 +114,10 @@ export default class Community extends Component {
     //   url:'/pages/createPost/index'
     // })
   }
-  onRefresherRefresh=()=>{
-    setTimeout(()=>{
-    Taro.stopPullDownRefresh()
-    console.log('shuaxin')
-    },1000)
+  addPostList=(postListObj)=>{
+    const postLists = this.state.postLists
+    const newPostLists = [postListObj,...postLists]
+    this.setState({postLists:newPostLists})
   }
 
   onPullDownRefresh() {
@@ -127,11 +131,31 @@ export default class Community extends Component {
       Taro.stopPullDownRefresh();
     },1000)
   }
+
+  componentWillMount(){
+    db.getAll('content').then((value) => {
+        this.setState({testLists:value})
+    })
+  }
+  
+  //有bug的发表
+  componentDidShow (){
+    var postListObj = JSON.parse(decodeURI(Current.router.params.postListObj))
+    console.log(postListObj)
+    const postLists = this.state.postLists
+    if(postListObj !== ''){
+      const newPostLists = [postListObj,...postLists]
+      postListObj = ''
+      this.setState({postLists:newPostLists})
+    }
+  }
+
   
   render () {
     const tabList = [{ title: '想法' }, { title: '文章' }]
     const postLists = this.state.postLists
     const articleLists = this.state.articleLists
+    const testLists = this.state.testLists
     return (
       <View style='background-color: #f7f7f7;'>
         <AtTabs current={this.state.current} tabList={tabList} onClick={this.handleClick.bind(this)}>

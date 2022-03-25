@@ -4,6 +4,8 @@ import { View,Text, ScrollView } from '@tarojs/components'
 import './index.scss'
 import {  } from 'taro-ui'
 import GoodItem from '../../components/goodItem'
+import Bomb from '../../value/bomb'
+let db = new Bomb({sercretKey:"8a7e35df0e10c1ec", apiSafeCode:"000419"});
 
 export default class GoodList extends Component {
 
@@ -14,7 +16,8 @@ export default class GoodList extends Component {
       {id:'003',title:'前端进阶-4小时实操Vue项目',author:'尤雨溪',stuNum:'163',priceInt:'0',priceFloat:'00'},
       {id:'004',title:'前端入门-7小时实操Angular项目',author:'小厂前端开发工程师',stuNum:'81',priceInt:'123',priceFloat:'07'},
       {id:'005',title:'随便是啥',author:'XXXX',stuNum:'13',priceInt:'1653',priceFloat:'00'},
-    ]
+    ],
+    testLists:[]
   }
   data = {
     option1: [
@@ -31,8 +34,15 @@ export default class GoodList extends Component {
     value2: 'a',
   }
 
+  componentWillMount(){
+    db.getAll('goods').then((value) => {
+        this.setState({testLists:value})
+    })
+  }
+
   render () {
     const goodLists = this.state.goodLists
+    const testLists = this.state.testLists
     return (
       <View className='goodList-container'>
         <View className='goodList-header'>
@@ -44,7 +54,7 @@ export default class GoodList extends Component {
         </View>
         <ScrollView enableFlex={true} className='goodList-content'>
             {
-              goodLists.map((goodList)=>{
+              testLists.map((goodList)=>{
                 return <GoodItem goodList = {goodList}></GoodItem>
               })
             }

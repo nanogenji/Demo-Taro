@@ -2,15 +2,15 @@
   display: flex;
   flex-flow: column nowrap;
   .goodDetails-img{
-    width: 100%;
-    height: 480px;
+    width: 750px;
+    height: 551px;
     background: #e6005c;
   }
   .goodDetails-intro{
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-evenly;
-    height: 720px;
+    min-height: 720px;
     background-color: #f7f7f7;
     .goodDetails-header{
       height: 400px;
@@ -35,7 +35,7 @@
       }
       .goodDetails-header-price{
         font-size: 44px;
-        margin-top: 40px;
+        margin-top: 20px;
         margin-left: 50px;
         color: #f52443;
         .goodDetails-header-price-currency{
@@ -121,4 +121,7 @@
       width: 45%;
     }
   }
+}
+.emptyView{
+  height: 100px;
 }
