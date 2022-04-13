@@ -5,6 +5,8 @@ import './index.scss'
 import { AtSwipeAction,AtButton,AtFloatLayout,AtRadio,AtCheckbox,AtToast,AtIcon  } from 'taro-ui'
 import CartItem from '../../components/cartItem'
 // import Test from '../../components/test'
+import Bomb from '../../value/bomb'
+let db = new Bomb({sercretKey:"8a7e35df0e10c1ec", apiSafeCode:"000419"});
 
 export default class Cart extends Component {
   constructor(props){
@@ -17,11 +19,12 @@ export default class Cart extends Component {
       toastOpen:false,
       submitDisabled:true,
       checkAlldisable:false,
-      cartLists: [
-        {id:'001',name:'Taro入门',detail:'入门详情',priceInt:'123',priceFloat:'50',pick:false},
-        {id:'002',name:'Taro实战',detail:'实战详情',priceInt:'321',priceFloat:'99',pick:false},
-        {id:'003',name:'Taro放弃',detail:'忘了我吧',priceInt:'0',priceFloat:'01',pick:false},
-      ]
+      // cartLists: [
+      //   {id:'001',name:'Taro入门',detail:'入门详情',priceInt:'123',priceFloat:'50',pick:false},
+      //   {id:'002',name:'Taro实战',detail:'实战详情',priceInt:'321',priceFloat:'99',pick:false},
+      //   {id:'003',name:'Taro放弃',detail:'忘了我吧',priceInt:'0',priceFloat:'01',pick:false},
+      // ],
+      cartLists:[]
     }
     this.addressChange = this.addressChange.bind(this)
   }
@@ -220,7 +223,18 @@ export default class Cart extends Component {
   //   // console.log(newSubmitDisabled)
   // }
 
+  componentWillMount(){
+    db.getAll('cartlist').then((value) => {
+      console.log(value)
+      this.setState({cartLists:value})
+    })
+  }
+  
   componentDidMount=()=>{
+
+  }
+
+  componentDidUpdate(){
     const checkAlldisable = this.state.checkAlldisable
     const cartLists = this.state.cartLists
     let newCheckAlldisable = false
@@ -231,9 +245,9 @@ export default class Cart extends Component {
     else{
       newCheckAlldisable = false
     }
-    this.setState({checkAlldisable:newCheckAlldisable})
+    // this.setState({checkAlldisable:newCheckAlldisable})
   }
-  
+
   render () {
     const flag = this.state.flag
     const cartLists = this.state.cartLists

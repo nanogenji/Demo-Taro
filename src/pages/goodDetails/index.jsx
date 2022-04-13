@@ -7,6 +7,9 @@ import Ava from '../../assets/user.png'
 import Bomb from '../../value/bomb'
 let db = new Bomb({sercretKey:"8a7e35df0e10c1ec", apiSafeCode:"000419"});
 
+var Bmob = require('../../value/src/lib/app');
+Bmob.initialize("8a7e35df0e10c1ec", "000419");
+
 export default class GoodDetails extends Component {
   $instance = getCurrentInstance()
   constructor (props) {
@@ -16,9 +19,10 @@ export default class GoodDetails extends Component {
       flag:false,
       open: true,
       courseList:[],
-      startTime:''
+      startTime:'',
+      isCartToast:false
     }
-    this.openToast = this.openToast.bind(this)
+    // this.openToast = this.openToast.bind(this)
   }
   handleClick (value) {
     this.setState({
@@ -33,13 +37,29 @@ export default class GoodDetails extends Component {
   }
 
 
-  openToast(){
-    const flag = this.state.flag
-    this.setState({flag:true})
-  }
-  addCartBtn(){
+  // openToast(){
+  //   const flag = this.state.flag
+  //   this.setState({flag:true})
+  // }
+  addCartBtn(course){
+    const isCartToast = this.state.isCartToast
+    const query = Bmob.Query('cartlist');
+    query.set("priceInt",course.priceInt)
+    query.set("priceFloat",course.priceFloat)
+    query.set("name",course.title)
+    query.set("detail",course.salerDetail)
+    query.set("label",course.salerDetail)
+    query.save().then(res => {
+      console.log(res)
+      console.log('加入购物车成功')
     console.log('加入购物车成功')
+      this.setState({isCartToast:true})
+    }).catch(err => {
+      console.log(err)
+    })
+    // console.log(course.objectId)
   }
+
   buyBtn(){
     console.log('立即购买')
   }
@@ -77,12 +97,12 @@ export default class GoodDetails extends Component {
   }
   
   render () {
-    const flag = this.state.flag
     const tabList = [{ title: '介绍' }, { title: '目录' }, { title: '评价' }]
     // const courseList = JSON.parse(decodeURI(Current.router.params.courseList))
     const courseList = this.state.courseList
     const startTime = this.getDate(courseList.createdAt)
     const endTime = this.getDate(courseList.updatedAt)
+    const isCartToast = this.state.isCartToast
     return (
       <View enableFlex={true} className='goodDetails-container'>
         <Image className='goodDetails-img'/>
@@ -154,13 +174,13 @@ export default class GoodDetails extends Component {
         <van-goods-action-button
           text="加入购物车"
           type="warning"
-          onClick={this.addCartBtn.bind(this)}
+          onClick={this.addCartBtn.bind(this,courseList)}
           color='#79d2d2'
         />
         <van-goods-action-button text="立即购买" color='#f44336' onClick={this.buyBtn.bind(this)} />
     </van-goods-action>
 
-      <AtToast isOpened={flag} text="添加成功" icon='{check}' duration={1000}></AtToast>
+      <AtToast isOpened={isCartToast} text="添加成功" icon='check' duration={1000}></AtToast>
       </View>
     )
   }

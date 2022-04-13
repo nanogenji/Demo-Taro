@@ -4,13 +4,31 @@ import { View,Text } from '@tarojs/components'
 import './index.scss'
 import { AtAvatar,AtGrid,AtListItem } from 'taro-ui'
 import Ava from '../../assets/user.png'
-
+import Bomb from '../../value/bomb'
+let db = new Bomb({sercretKey:"8a7e35df0e10c1ec", apiSafeCode:"000419"});
 
 export default class Profile extends Component {
-
+  state={
+    userInfo:[]
+  }
+  componentWillMount(){
+    db.get_('user','WGZS333L').then((value) =>{
+      this.setState({userInfo:value})
+    })
+  }
   toSettings(){
     Taro.navigateTo({
-      url:'/pages/settings/index'
+      url:'/pages/accountInfo/index'
+    })
+  }
+  toProfessionTest(){
+    Taro.navigateTo({
+      url:'/pages/professionTest/index'
+    })
+  }
+  toFeedback(){
+    Taro.navigateTo({
+      url:'/pages/feedback/index'
     })
   }
 
@@ -23,7 +41,7 @@ export default class Profile extends Component {
   Info(){
     Taro.showModal({
       title: '关于',
-      content: '作者@cyd\n',
+      content: '作者：前端@cyd\n后端@xjh',
       success: function (res) {
         if (res.confirm) {
           console.log('用户点击确定')
@@ -35,6 +53,7 @@ export default class Profile extends Component {
   }
 
   render () {
+    const userInfo = this.state.userInfo
     const gridList = [
       {
         image: require('../../assets/collect.png'),
@@ -98,8 +117,8 @@ export default class Profile extends Component {
           <View className='header'>
             <AtAvatar className='userAva' circle image={Ava}></AtAvatar>
             <View className='user-info'>
-              <Text className='name'>Username</Text>
-              <Text className='email'>A********z@gmail.com</Text>
+              <Text className='name'>{userInfo.userName}</Text>
+              <Text className='email'>{userInfo.email}</Text>
             </View>
           </View>
           <AtGrid className='core' mode='rect' hasBorder={false} data={gridList} />
@@ -112,8 +131,8 @@ export default class Profile extends Component {
             </View> */}
             <View className='end'>
               <AtListItem hasBorder={false} iconInfo={{size:25,value:'calendar',color:'#90a4ae'}} title='学习进度' onClick = {this.Info} arrow='right' />
-              <AtListItem hasBorder={false} iconInfo={{size:25,value:'eye',color:'#90a4ae'}} title='职业测试' onClick = {this.Info} arrow='right' />
-              <AtListItem hasBorder={false} iconInfo={{size:25,value:'help',color:'#90a4ae'}} title='帮助与反馈' onClick = {this.Info} arrow='right' />
+              <AtListItem hasBorder={false} iconInfo={{size:25,value:'eye',color:'#90a4ae'}} title='职业测试' onClick = {this.toProfessionTest} arrow='right' />
+              <AtListItem hasBorder={false} iconInfo={{size:25,value:'help',color:'#90a4ae'}} title='帮助与反馈' onClick = {this.toFeedback} arrow='right' />
               <AtListItem hasBorder={false} iconInfo={{size:25,value:'menu',color:'#90a4ae'}} title='关于' onClick = {this.Info} arrow='right' />
               <AtListItem hasBorder={false} iconInfo={{size:25,value:'settings',color:'#90a4ae'}} title='设置' onClick = {this.toSettings} arrow='right' />
             </View>

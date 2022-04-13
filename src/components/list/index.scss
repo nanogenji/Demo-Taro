@@ -1,0 +1,24 @@
+.container{
+  width: 700px;
+  height: 100px;
+  display: flex;
+  flex-flow: row nowrap;
+  margin-left: 25px;
+  justify-content: space-between;
+  .key{
+    height: 100px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin-left: 26px;
+    color: #3b3a39;
+  }
+  .value{
+    height: 100px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin-right: 58px;
+    color: #8a8886;
+  }
+}

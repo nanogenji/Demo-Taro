@@ -3,9 +3,9 @@ import Taro from '@tarojs/taro'
 import { View,Swiper,SwiperItem,Text, Button,ScrollView } from '@tarojs/components'
 import './index.scss'
 import { AtSearchBar,AtGrid,AtCard,AtFab } from 'taro-ui'
-import banner1 from '../../assets/banner1.jpg'
-import banner2 from '../../assets/banner2.jpg'
-import banner3 from '../../assets/banner3.jpg'
+// import banner1 from '../../assets/banner1.jpg'
+// import banner2 from '../../assets/banner2.jpg'
+// import banner3 from '../../assets/banner3.jpg'
 import { useState } from 'react'
 import GoodItemB from '../../components/goodItemB'
 import Msg from '../../components/msg'
@@ -67,20 +67,38 @@ export default class Home extends Component {
   }
 
   testNavi=() =>{
-    // Taro.navigateTo({
-    //   url:'/pages/login/index'
-    // })
-    const courseLists = this.state.courseLists
-    const testLists = this.state.testLists
-    // console.log(courseLists)
-    console.log(testLists)
+    Taro.navigateTo({
+      url:'/pages/login/index'
+    })
   }
 
   onPullDownRefresh() {
     console.log('onPullDownRefresh...........')
 
     // TODO 这里加重新刷新界面的要的操作，比如网络请求
+    db.getAll('goods').then((value) => {
+      this.setState({testLists:value})
+    })
+    Taro.getStorage({
+      key:'bmob',
+      success: function(res){
+        console.log(res.data)
+      },
+      fail:function(){
+        Taro.navigateTo({
+          url:'/pages/login/index'
+        })
+      }
+    })
+    try{
+      var value = Taro.getStorageSync('Bmob')
+      if(value){
+        console.log(value)
+      }
+    }catch(e){
+      console.log(e)
 
+    }
     // 接口请求完毕后隐藏两个loading , 标题和下拉区域
     setTimeout(()=>{
       Taro.hideLoading();
@@ -110,6 +128,48 @@ export default class Home extends Component {
     db.getAll('goods').then((value) => {
         this.setState({testLists:value})
     })
+    Taro.getStorage({
+      key:'bmob',
+      success: function(res){
+        console.log(res.data)
+      },
+      fail:function(){
+        Taro.navigateTo({
+          url:'/pages/login/index'
+        })
+      }
+    })
+    try{
+      var value = Taro.getStorageSync('Bmob')
+      if(value){
+        console.log(value)
+      }
+    }catch(e){
+      console.log(e)
+    }
+  }
+
+  componentDidMount(){
+    Taro.getStorage({
+      key:'bmob',
+      success: function(res){
+        console.log(res.data)
+      },
+      fail:function(){
+        Taro.navigateTo({
+          url:'/pages/login/index'
+        })
+      }
+    })
+    try{
+      var value = Taro.getStorageSync('Bmob')
+      if(value){
+        console.log(value)
+      }
+    }catch(e){
+      console.log(e)
+
+    }
   }
 
   loadcomponent=()=>{
@@ -203,7 +263,7 @@ export default class Home extends Component {
             </SwiperItem>
           </Swiper>
           <View className='homeCategory'>
-          <AtGrid columnNum={4} hasBorder={false} data={HomeGirdList} onClick={this.toGoodsList}/>
+          <AtGrid columnNum={4} hasBorder={false} data={HomeGirdList} onClick={this.testNavi}/>
           </View>
           <View className='home-goodList'>
             <Text className='home-goodList-title'>精选好课</Text>
@@ -211,7 +271,8 @@ export default class Home extends Component {
             {  
               testLists.map((courseList) =>{
               return <GoodItemB courseList = {courseList}/>
-              })}
+              })
+            }
             </View>
           </View>
           <AtFab className='tocartFab' onClick={this.toCart}>

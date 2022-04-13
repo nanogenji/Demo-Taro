@@ -1,0 +1,27 @@
+.feedbackTitle{
+  width: 700px;
+  font-size: 40px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  margin-left: 25px;
+}
+.feedbackText{
+  width: 700px;
+  margin-left: 25px;
+  margin-top: 50px;
+}
+.feedbackBtn{
+  width: 450px;
+  height: 100px;
+  margin-top: 80px;
+  border-radius: 999em;
+  border: none;
+  background-color: #3f80dd;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+}

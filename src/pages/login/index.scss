@@ -7,7 +7,7 @@
   align-items: center;
   .logo{
     font-size: 3rem;
-    color: #0a66c2;
+    color: #3f80dd;
     margin-top: 60px;
   }
   .login-container{
@@ -21,6 +21,21 @@
     background-color: white;
     border-radius: 0.6rem;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    .passwordContainer{
+      width: 650px;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      .passwordInput{
+        margin-top: 30px;
+      }
+      .at-icon-eye{
+        margin-top: 10px;
+        margin-right: 30px;
+      }
+    
+    }
 
     .login-help{
       width: 600px;
@@ -55,16 +70,24 @@
       flex-flow: column nowrap;
     }
     .submit{
-      width: 600px;
+      width: 450px;
+      height: 100px;
       border-radius: 999em;
-      background: #0a66c2;
+      background: #3f80dd;
       color: white;
     }
     .logon{
-      width: 600px;
-      margin-top: 30px;
+      width: 450px;
+      height: 100px;
+      margin-top: 40px;
       border-radius: 999em;
-      border-color: #0a66c2;
+      border-color: #3f80dd;
     }
+  }
+  .signUpErr{
+    margin-top: 15px;
+    margin-left: 30px;
+    color: #f44336;
+    font-size: 28px;
   }
 }

@@ -1,0 +1,130 @@
+.signUpContainer{
+  background-color: #f7f7f7;
+  min-height: 1440px;
+  top: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  .signUpTitle{
+    width: 700px;
+    font-size: 40px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 40px;
+    margin-left: 25px;
+  }
+  .InputTip{
+    font-weight: 600;
+    font-size: 34px;
+    margin-top: 30px;
+    // margin-bottom: 30px;
+    margin-left: 100px;
+  }
+  .signUpErr{
+    margin-top: 15px;
+    margin-left: 110px;
+    color: #f44336;
+    font-size: 28px;
+  }
+
+  .signUpUserName{
+    width: 600px;
+    height: 100px;
+    margin-left: 75px;
+    margin-top: 20px;
+    border-radius: 999em;
+    background-color: white;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+  }
+  .signUpUserNameInput{
+    margin-left: 36px;
+    .input-placeholder{
+      margin-left: 10px;
+      font-size: 30px;
+      color: #a19f9d;
+    }
+  }
+
+  .signUpEmail{
+    width: 600px;
+    height: 100px;
+    margin-left: 75px;
+    margin-top: 20px;
+    border-radius: 999em;
+    background-color: white;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+  }
+  .signUpEmailInput{
+    margin-left: 36px;
+    .input-placeholder{
+      margin-left: 10px;
+      font-size: 30px;
+      color: #a19f9d;
+    }
+  }
+
+  .signUpPassword{
+    width: 600px;
+    height: 100px;
+    margin-left: 75px;
+    margin-top: 20px;
+    border-radius: 999em;
+    background-color: white;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    .signUpPasswordInput{
+      margin-left: 36px;
+      .input-placeholder{
+        margin-left: 10px;
+        font-size: 30px;
+        color: #a19f9d;
+      }
+    }
+  }
+
+  .signUpPasswordConfirm{
+    width: 600px;
+    height: 100px;
+    margin-left: 75px;
+    margin-top: 20px;
+    border-radius: 999em;
+    background-color: white;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    .signUpPasswordConfirmInput{
+      margin-left: 36px;
+      .input-placeholder{
+        margin-left: 10px;
+        font-size: 30px;
+        color: #a19f9d;
+      }
+    }
+  }
+  .at-icon-eye{
+    margin-right: 30px;
+  }
+
+  .signUpSub{
+    width: 450px;
+    height: 100px;
+    margin-top: 90px;
+    margin-bottom: 60px;
+    border-radius: 999em;
+    border: none;
+    background-color: (#3f80dd!important);
+    // color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 34px;
+  }
+}

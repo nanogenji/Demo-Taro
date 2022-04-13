@@ -1,0 +1,33 @@
+.bd{
+  background-color: #f7f7f7;
+  min-height: 1440px;
+  top: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  .card{
+    margin-top: 80px;
+  }
+  .userName{
+    margin-top: 30px;
+    margin-left: 70px;
+    font-size: 38px;
+  }
+  .infoTitle{
+    font-size: 42px;
+    font-weight: 600;
+    margin-top: 70px;
+    margin-left: 40px;
+  }
+  .infoContainer{
+    width: 700px;
+    margin-left: 25px;
+    background-color: white;
+    margin-top: 50px;
+    border-radius: 0.6em;
+  }
+  .logout{
+    margin-top: 400px;
+    color: #f44336;
+    border: 0;
+}
+}

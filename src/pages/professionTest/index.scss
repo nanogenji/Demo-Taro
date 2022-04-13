@@ -1,0 +1,38 @@
+.professionTestTitle{
+  width: 700px;
+  font-size: 40px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 40px;
+  margin-left: 25px;
+}
+.professionInfo{
+  margin: auto 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+  color: #a19f9d;
+}
+.professionDescribe{
+  margin-left: 35px;
+  margin-top: 50px;
+  color: #323130;
+  margin-bottom: 24px;
+}
+.professionTestBtn{
+  width: 450px;
+  height: 100px;
+  margin-top: 50px;
+  margin-bottom: 60px;
+  border-radius: 999em;
+  border: none;
+  background-color: #3f80dd;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+}

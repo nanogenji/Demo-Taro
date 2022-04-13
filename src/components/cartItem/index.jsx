@@ -6,7 +6,6 @@ import { View,Text,Image,Checkbox,Button } from '@tarojs/components'
 // import './FloatLayout.scss'
 import './index.scss'
 import { AtSwipeAction, AtCheckbox,AtInputNumber,AtFloatLayout, AtButton,AtTag  } from 'taro-ui'
-import thisisgood from '../../assets/thisisgood.jpg'
 export default class CartItem extends Component {
   constructor (props){
     super(props)
@@ -82,10 +81,6 @@ export default class CartItem extends Component {
   ]
     return (
       <View style={'height:100%'}>
-        {/* <Image 
-        style='height:170px;width:100%;'
-        src={thisisgood}
-        /> */}
       <AtSwipeAction onClick={()=>this.handleDelete(cartList.id)} maxDistance={120} areaWidth={375} options={btnActionList}>
           <View className='good-container'>
             <Checkbox style={'margin-left:14px'} checked={cartList.pick} onClick={this.handleCheck(cartList.id)}></Checkbox>
