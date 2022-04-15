@@ -6,6 +6,12 @@ import { View,Text,Image,Checkbox,Button } from '@tarojs/components'
 // import './FloatLayout.scss'
 import './index.scss'
 import { AtSwipeAction, AtCheckbox,AtInputNumber,AtFloatLayout, AtButton,AtTag  } from 'taro-ui'
+import Bomb from '../../value/bomb'
+let db = new Bomb({sercretKey:"8a7e35df0e10c1ec", apiSafeCode:"000419"});
+
+var Bmob = require('../../value/src/lib/app');
+Bmob.initialize("8a7e35df0e10c1ec", "000419");
+
 export default class CartItem extends Component {
   constructor (props){
     super(props)
@@ -27,7 +33,7 @@ export default class CartItem extends Component {
     console.log("flag:",flag)
   }
 
-  onClick(name){
+  onClick(){
     const isPick = this.state.isPick
     this.setState({isPick:!isPick})
     console.log(isPick)
@@ -43,9 +49,14 @@ export default class CartItem extends Component {
     })
   }
 
-  handleDelete = (id,btnActionList)=>{
-    console.log(btnActionList)
+  handleDelete = (id,objectId)=>{
+    const query = Bmob.Query('cartlist');
     this.props.deleteCartItem(id)
+    query.destroy(objectId).then(res =>{
+      console.log(res)
+    }).catch(err =>{
+      console.log(err)
+    })
   }
 
   handleCheck = (id)=>{
@@ -81,7 +92,7 @@ export default class CartItem extends Component {
   ]
     return (
       <View style={'height:100%'}>
-      <AtSwipeAction onClick={()=>this.handleDelete(cartList.id)} maxDistance={120} areaWidth={375} options={btnActionList}>
+      <AtSwipeAction onClick={()=>this.handleDelete(cartList.id,cartList.objectId)} maxDistance={120} areaWidth={375} options={btnActionList}>
           <View className='good-container'>
             <Checkbox style={'margin-left:14px'} checked={cartList.pick} onClick={this.handleCheck(cartList.id)}></Checkbox>
               {/* 是否选中:{cartList.pick+''} */}

@@ -8,6 +8,9 @@ import CartItem from '../../components/cartItem'
 import Bomb from '../../value/bomb'
 let db = new Bomb({sercretKey:"8a7e35df0e10c1ec", apiSafeCode:"000419"});
 
+var Bmob = require('../../value/src/lib/app');
+Bmob.initialize("8a7e35df0e10c1ec", "000419");
+
 export default class Cart extends Component {
   constructor(props){
     super(props)
@@ -41,16 +44,38 @@ export default class Cart extends Component {
   }
   onSub =()=>{
     const total = this.state.total
-    // const cartLists = this.state.cartLists
-    // const 
-    // const newCartLists = cartLists.map((cartListObj)=>{
-    //   if(cartListObj.pick === true){
-    //   }
-    // })
-    // console.log('提交成功,本次订单共：' + total / 100 + '元')
-    // return <AtToast isOpened text={'提交成功,本次订单共：' + total / 100 + '元'} status={"success"} ></AtToast>
     const toastOpen = this.state.toastOpen
-    this.setState({toastOpen:!toastOpen})
+    const cartLists = this.state.cartLists
+    const query = Bmob.Query('orderlist');
+    const query2 = Bmob.Query('cartlist');
+    const newCartLists = cartLists.map((cartListObj)=>{
+      if(cartListObj.pick === true){
+                //+order
+                query.set("goodName",cartListObj.name)
+                query.set("shopName",cartListObj.detail)
+                query.set('priceInt',cartListObj.priceInt)
+                query.set('priceFloat',cartListObj.priceFloat)
+                query.save().then(res => {
+                  this.setState({toastOpen:!toastOpen})
+                  console.log(res)
+                }).catch(err => {
+                  console.log(err)
+                  Taro.atMessage({
+                    'message': '下单失败',
+                    'type': 'error',
+                  })
+                })
+                //-cart
+                query2.destroy(cartListObj.objectId),then(res =>{
+                  console.log(res)
+                }).catch(err =>{
+                  console.log(err)
+                })
+      }
+    })
+    console.log('提交成功,本次订单共：' + total / 100 + '元')
+    return <AtToast isOpened text={'提交成功,本次订单共：' + total / 100 + '元'} status={"success"} ></AtToast>
+
   }
 
   //地址
@@ -175,7 +200,7 @@ export default class Cart extends Component {
     const toastOpen = this.state.toastOpen
     this.setState({toastOpen:false})
   }
-  //全选禁用
+  //旧全选禁用
   // checkAlldisable = ()=>{
   //   let flag = 0
   //   const cartLists = this.state.cartLists

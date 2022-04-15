@@ -114,9 +114,6 @@ export default class Community extends Component {
       url:'/pages/createArticle/index'
       })
     }
-    // Taro.navigateTo({
-    //   url:'/pages/createPost/index'
-    // })
   }
   addPostList=(postListObj)=>{
     const postLists = this.state.postLists

@@ -12,22 +12,22 @@ Bmob.initialize("8a7e35df0e10c1ec", "000419");
 export default class OrderList extends Component {
 
   state = {
-    orderLists:[
-      {id:'001',shopName:'人民邮电出版社',goodName:'JavaScript高级程序设计',priceInt:'100',priceFloat:'99'},
-      {id:'002',shopName:'中国电力出版社',goodName:'CSS权威指南（第三版）',priceInt:'70',priceFloat:'00'},
-      {id:'003',shopName:'作家出版社',goodName:'活着',priceInt:'37',priceFloat:'59'},
-    ],
-    testLists:[]
+    // orderLists:[
+    //   {id:'001',shopName:'人民邮电出版社',goodName:'JavaScript高级程序设计',priceInt:'100',priceFloat:'99'},
+    //   {id:'002',shopName:'中国电力出版社',goodName:'CSS权威指南（第三版）',priceInt:'70',priceFloat:'00'},
+    //   {id:'003',shopName:'作家出版社',goodName:'活着',priceInt:'37',priceFloat:'59'},
+    // ],
+    orderLists:[]
   }
 
   componentWillMount(){
-    db.getAll('user').then((value) => {
-        this.setState({testLists:value})
+    db.getAll('orderlist').then((value) => {
+        this.setState({orderLists:value})
     })
-    const query = Bmob.Query('content');
-    query.find().then(res => {
-      console.log(res)
-    });
+    // const query = Bmob.Query('content');
+    // query.find().then(res => {
+    //   console.log(res)
+    // });
   }
 
   render () {
@@ -36,10 +36,9 @@ export default class OrderList extends Component {
     return (
       <ScrollView enableFlex={true} className='orderList-container'>
         {
-          // orderLists.map((orderList) =>{
-          //   return <OrderItem orderList = {orderList}/>
-          // })
-          console.log(testLists)
+          orderLists.map((orderList) =>{
+            return <OrderItem orderList = {orderList}/>
+          })
         }
       </ScrollView>
     )

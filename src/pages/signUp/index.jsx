@@ -78,7 +78,7 @@ export default class Index extends Component {
     const email = this.state.email
     const emailErr = this.state.emailErr
     const isFinished = this.state.isFinished
-    var regex = new RegExp("^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$")
+    var regex = new RegExp(`^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$`)
     if(regex.test(email)){
       this.setState({emailErr:false})
     }else{
@@ -138,10 +138,9 @@ export default class Index extends Component {
   }
 
   checkFinished=()=>{
-
   }
 
-  signUp=(type)=>{
+  signUp=()=>{
     const userName = this.state.userName
     const email = this.state.email
     const password = this.state.password
@@ -169,7 +168,7 @@ export default class Index extends Component {
     }).catch(err => {
       console.log(err)
       Taro.atMessage({
-        'message': '注册失败',
+        'message': '注册失败，请稍后再试',
         'type': 'error',
       })
     });
@@ -216,7 +215,7 @@ export default class Index extends Component {
           <View className='at-icon at-icon-eye' onClick={this.changePasswordDis}></View>
         </View>
         {
-          (passwordErr === true) ? <View className='signUpErr'>密码最少需要六位数</View> :<View></View>
+          (passwordErr === true) ? <View className='signUpErr'>密码至少需要六位数</View> :<View></View>
         }
 
 

@@ -25,7 +25,7 @@ export default class OnePost extends Component {
     //   url:`/pages/userCard/index?postList=${postList}`
     // })
     Taro.navigateTo({
-      url:`/pages/userCard/index?userId=${userId}`
+      url:`../../pagesA/userCard/index?userId=${userId}`
     })
   }
 

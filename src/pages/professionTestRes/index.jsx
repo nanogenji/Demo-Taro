@@ -108,6 +108,7 @@ export default class Index extends Component {
     if(res.includes('R') && res.includes('I') && res.includes('A')){
       this.setState({work:'牙科技术员、陶工、 建筑设计员、模型工、细木工、制作链条人员。'})
     }
+    //#region 
     else if(res.includes('R') && res.includes('I') && res.includes('S')){
       this.setState({work:`厨师、林务员、跳水员、潜水员、染色员、电器修理、眼镜制作、电工、
       纺织机器装配工、服务员、装玻璃工人、发电厂工人、焊接工。
@@ -401,7 +402,8 @@ export default class Index extends Component {
     }    
     else if(res.includes('S') && res.includes('I') && res.includes('R')){
       this.setState({work:`理疗员、救护队工作人员、手足病医生、职业病治疗助手。`})
-    }    
+    }
+    //#endregion  
     else{
       this.setState({work:`您的类型样本数较少，暂无推荐职业。`})
     }

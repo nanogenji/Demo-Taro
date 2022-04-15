@@ -7,14 +7,12 @@ import Ava from '../../assets/user.png'
 import Bomb from '../../value/bomb'
 let db = new Bomb({sercretKey:"8a7e35df0e10c1ec", apiSafeCode:"000419"});
 
+var Bmob = require('../../value/src/lib/app');
+Bmob.initialize("8a7e35df0e10c1ec", "000419");
 export default class Profile extends Component {
   state={
-    userInfo:[]
-  }
-  componentWillMount(){
-    db.get_('user','WGZS333L').then((value) =>{
-      this.setState({userInfo:value})
-    })
+    userInfo:[],
+    userId:[]
   }
   toSettings(){
     Taro.navigateTo({
@@ -23,7 +21,7 @@ export default class Profile extends Component {
   }
   toProfessionTest(){
     Taro.navigateTo({
-      url:'/pages/professionTest/index'
+      url:'../../pagesA/professionTest/index'
     })
   }
   toFeedback(){
@@ -37,11 +35,51 @@ export default class Profile extends Component {
       url:'/pages/orderList/index'
     })
   }
+  toLogin(){
+    Taro.navigateTo({
+      url:'/pages/login/index'
+    })
+  }
+
+  componentWillMount(){
+    const userId = this.state.userId
+    var temp = ''
+    temp = Taro.getStorageSync('bmob')
+    // console.log(temp.slice(temp.indexOf('objectId')+11,temp.indexOf('objectId')+21))
+    this.setState({userId:temp.slice(temp.indexOf('objectId')+11,temp.indexOf('objectId')+21)})
+  }
+
+  componentDidMount(){
+    const userId = this.state.userId
+    const userInfo = this.state.userInfo
+    const query = Bmob.Query('_User');
+    query.get(userId).then(res => {
+      this.setState({userInfo:res})
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+    })
+    console.log(userId,userId.length)
+  }
 
   Info(){
     Taro.showModal({
       title: '关于',
       content: '作者：前端@cyd\n后端@xjh',
+      showCancel:false,
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  }
+  toProcess(){
+    Taro.showModal({
+      content: 'TBC',
+      showCancel:false,
       success: function (res) {
         if (res.confirm) {
           console.log('用户点击确定')
@@ -54,6 +92,7 @@ export default class Profile extends Component {
 
   render () {
     const userInfo = this.state.userInfo
+    const userId = this.state.userId
     const gridList = [
       {
         image: require('../../assets/collect.png'),
@@ -114,27 +153,28 @@ export default class Profile extends Component {
     ];
     return (
         <View>
-          <View className='header'>
-            <AtAvatar className='userAva' circle image={Ava}></AtAvatar>
-            <View className='user-info'>
-              <Text className='name'>{userInfo.userName}</Text>
-              <Text className='email'>{userInfo.email}</Text>
-            </View>
-          </View>
+          {
+            (userId.length !== 0) ?             
+            <View className='header'>
+              <AtAvatar className='userAva' circle image={Ava}></AtAvatar>
+              <View className='user-info'>
+                <Text className='name'>{userInfo.username}</Text>
+                <Text className='email'>{userInfo.email}</Text>
+              </View>
+            </View>  : <View className='guest' onClick={this.toLogin}>登录 / 注册</View>
+          }
+
           <AtGrid className='core' mode='rect' hasBorder={false} data={gridList} />
             <View className='order'>
               <AtListItem title='我的订单'extraText='查看全部订单' arrow='right' onClick={this.toOrderList} />
               <AtGrid className='order-action' columnNum={4}  hasBorder={false} data={orderActionList} />
             </View>
-            {/* <View className='event'>
-              <AtGrid columnNum={4} mode='rect' hasBorder={false} data={gridList2} />
-            </View> */}
             <View className='end'>
-              <AtListItem hasBorder={false} iconInfo={{size:25,value:'calendar',color:'#90a4ae'}} title='学习进度' onClick = {this.Info} arrow='right' />
+              <AtListItem hasBorder={false} iconInfo={{size:25,value:'calendar',color:'#90a4ae'}} title='学习进度' onClick = {this.toProcess} arrow='right' />
               <AtListItem hasBorder={false} iconInfo={{size:25,value:'eye',color:'#90a4ae'}} title='职业测试' onClick = {this.toProfessionTest} arrow='right' />
               <AtListItem hasBorder={false} iconInfo={{size:25,value:'help',color:'#90a4ae'}} title='帮助与反馈' onClick = {this.toFeedback} arrow='right' />
               <AtListItem hasBorder={false} iconInfo={{size:25,value:'menu',color:'#90a4ae'}} title='关于' onClick = {this.Info} arrow='right' />
-              <AtListItem hasBorder={false} iconInfo={{size:25,value:'settings',color:'#90a4ae'}} title='设置' onClick = {this.toSettings} arrow='right' />
+              <AtListItem hasBorder={false} iconInfo={{size:25,value:'settings',color:'#90a4ae'}} title='账号信息' onClick = {this.toSettings} arrow='right' />
             </View>
         </View>
     )

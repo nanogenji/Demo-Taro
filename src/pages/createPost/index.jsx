@@ -16,6 +16,7 @@ export default class CreatePost extends Component {
     this.state = {
       content: '',
       isDisabled:true,
+      userId:[]
     //   files: [
     //     {
     //     url: 'https://images.unsplash.com/photo-1531804055935-76f44d7c3621?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=688&q=80',
@@ -48,26 +49,38 @@ export default class CreatePost extends Component {
   }
   submit=()=>{
     const content = this.state.content
+    const userId = this.state.userId
     const query = Bmob.Query('content');
-    query.set("mainContent",content)
-    query.save().then(res => {
+    var temp = ''
+    temp = Taro.getStorageSync('bmob')
+    if(temp === 0){
       Taro.atMessage({
-        'message': '发送成功',
-        'type': 'success',
-      })
-      setTimeout(()=>{
-        Taro.navigateBack({
-          delta:1
-        })
-      },800)
-      console.log(res)
-    }).catch(err => {
-      console.log(err)
-      Taro.atMessage({
-        'message': '发送失败',
+        'message': '请您先登录账号',
         'type': 'error',
       })
-    })
+    }
+    else{
+      query.set("mainContent",content)
+      query.set("userName",userId)
+      query.save().then(res => {
+        Taro.atMessage({
+          'message': '发送成功',
+          'type': 'success',
+        })
+        setTimeout(()=>{
+          Taro.navigateBack({
+            delta:1
+          })
+        },800)
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+        Taro.atMessage({
+          'message': '发送失败，请稍后再试',
+          'type': 'error',
+        })
+      })
+    }
     //新帖子
     // const value = this.state.value
     // const id = parseInt(new Date().getTime() / 1000) + '';
@@ -105,11 +118,18 @@ export default class CreatePost extends Component {
       files
     })
   }
-  onFail (mes) {
-    console.log(mes)
-  }
   onImageClick (index, file) {
     console.log(index, file)
+  }
+
+  componentWillMount(){
+    const userId = this.state.userId
+    var temp = ''
+    temp = Taro.getStorageSync('bmob')
+    // console.log(temp.slice(temp.indexOf('objectId')+11,temp.indexOf('objectId')+21))
+    console.log(temp.slice(temp.indexOf('username')+11,temp.length - 2))
+    // console.log(temp.slice(temp.indexOf('username')+1,temp.indexOf('username')+11))
+    this.setState({userId:temp.slice(temp.indexOf('username')+11,temp.length - 2)})
   }
 
   render () {

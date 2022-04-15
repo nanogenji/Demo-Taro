@@ -1,7 +1,7 @@
 export default {
   pages: [
     'pages/home/index',
-    'pages/settings/index',
+    // 'pages/settings/index',
     'pages/createPost/index',
     'pages/index/index',
     'pages/community/index',
@@ -12,33 +12,33 @@ export default {
     'pages/goodsList/index',
     'pages/goodDetails/index',
     'pages/postDetails/index',
-    'pages/userCard/index',
+    // 'pages/userCard/index',
     'pages/createArticle/index',
     'pages/orderList/index',
     'pages/login/index',
     'pages/accountInfo/index',
     'pages/feedback/index',
-    'pages/professionTest/index',
-    'pages/professionTestInfo/index',
-    'pages/professionTestRes/index',
     'pages/signUp/index',
+    'pages/searchRes/index',
   ],
-  // subPackages:[
-  //   {
-  //     root:'pagesA/',
-  //       pages: [
-  //         'professionTest/index',
-  //         'professionTestInfo/index',
-  //         'professionTestRes/index',
-  //       ]
-  //   }
-  // ],
+  subPackages:[
+    {
+      root:'pagesA/',
+        pages: [
+          'professionTest/index',
+          'professionTestInfo/index',
+          'professionTestRes/index',
+          'settings/index',
+          'userCard/index',
+        ]
+    }
+  ],
   window: {
     backgroundTextStyle: 'light',
     // navigationBarBackgroundColor: '#6190e8',
-    navigationBarBackgroundColor: '#3f80dd',
-    navigationBarTitleText: 'WeChat',
-    navigationBarTextStyle: 'black',
+    navigationBarBackgroundColor: '#2e62cd',
+    navigationBarTitleText: 'weRoad',
+    navigationBarTextStyle: 'white',
     // enablePullDownRefresh: true,
     // backgroundTextStyle: "dark"
   },

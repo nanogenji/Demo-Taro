@@ -1,21 +1,29 @@
 .ban1{
-  background-color: #337d56;
+  background-color: #fefefe;
   border-radius: 0.8em;
   width: 700px;
   height: 300px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  .swiperImg{
+    width: 700px;
+    height: 300px;
+  }
 }
-.ban2{
-  background-color: #333;
-  border-radius: 0.8em;
-  width: 700px;
-  height: 300px;
-}
-.ban3{
-  background-color: #c7bd9a;
-  border-radius: 0.8em;
-  width: 700px;
-  height: 300px;
-}
+// .ban2{
+//   background-color: #333;
+//   border-radius: 0.8em;
+//   width: 700px;
+//   height: 300px;
+// }
+// .ban3{
+//   background-color: #c7bd9a;
+//   border-radius: 0.8em;
+//   width: 700px;
+//   height: 300px;
+// }
 
 .home-container{
   // height: 1800px;

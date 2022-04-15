@@ -46,24 +46,23 @@ export default class Login extends Component {
   blurEmail=()=>{
     const email = this.state.email
     const emailErr = this.state.emailErr
-    var regex = new RegExp("^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$")
+    var regex = new RegExp(`^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$`)
     if(regex.test(email)){
       this.setState({emailErr:false})
     }else{
       this.setState({emailErr:true})
     }
-    console.log(emailErr)
   }
   blurPassword=()=>{
-    // const emailErr = this.state.emailErr
-    // const password = this.state.password
-    // const isFinished = this.state.isFinished
-    // if(emailErr !== true && password.length > 0){
-    //   this.setState({isFinished:true})
-    // }
-    // else{
-    //   this.setState({isFinished:false})
-    // }
+    const emailErr = this.state.emailErr
+    const password = this.state.password
+    const isFinished = this.state.isFinished
+    if(emailErr !== true && password.length > 0){
+      this.setState({isFinished:true})
+    }
+    else{
+      this.setState({isFinished:false})
+    }
   }
   changePasswordDis=()=>{
     const isPassword = this.state.isPassword
@@ -81,7 +80,7 @@ export default class Login extends Component {
     Bmob.User.login(email,password).then(res => {
       console.log(res)
       Taro.atMessage({
-        'message': '登陆成功',
+        'message': '登录成功',
         'type': 'success',
       })
       setTimeout(()=>{
@@ -91,7 +90,7 @@ export default class Login extends Component {
       },800)
     }).catch(err => {
       Taro.atMessage({
-        'message': '登录失败，账号与密码不匹配',
+        'message': '登录失败，请检查输入或稍后再试',
         'type': 'error',
       })
       console.log(err)
@@ -110,12 +109,12 @@ export default class Login extends Component {
     const isPassword = this.state.isPassword
     return (
       <View className='login-bg'>
-        <Text className='logo'>Logo</Text>
+        <Text className='logo'>为路</Text>
         <View className='login-container'>
           <View className='login-input'>
             <AtInput
               name='mail'
-              type='digit'
+              type='text'
               placeholder='请输入邮箱'
               border={false}
               value={this.state.email}
@@ -139,7 +138,7 @@ export default class Login extends Component {
               <View className='at-icon at-icon-eye' onClick={this.changePasswordDis}></View>
             </View>
             <View className='login-help'>
-              <Checkbox className='remember'>记住我</Checkbox>
+              {/* <Checkbox className='remember'>记住我</Checkbox> */}
               <Text className='forgotPassword'>忘记密码?</Text>
             </View>
           </View>

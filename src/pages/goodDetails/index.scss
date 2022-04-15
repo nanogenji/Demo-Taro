@@ -3,17 +3,17 @@
   flex-flow: column nowrap;
   .goodDetails-img{
     width: 750px;
-    height: 551px;
-    background: #e6005c;
+    height: 400px;
+    background: #2e62cd;
   }
   .goodDetails-intro{
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-evenly;
-    min-height: 720px;
+    min-height: 800px;
     background-color: #f7f7f7;
     .goodDetails-header{
-      height: 400px;
+      height: 420px;
       display: flex;
       flex-flow: column nowrap;
       justify-content: space-around;
@@ -50,7 +50,7 @@
       }
     }
     .goodDetails-author{
-      height: 230px;
+      height: 250px;
       display: flex;
       flex-flow: column nowrap;
       background-color: white;

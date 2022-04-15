@@ -40,29 +40,60 @@ export default class Index extends Component {
   //   console.log(Math.abs(dt2 - dt1))
   //   console.log(parseInt(Math.abs(dt2 - dt1) / 1000 / 60 / 60 / 24 / 7));
   // }
+  componentWillMount(){
+    // const {courseList} = this.props
+    // console.log(courseList)
+    // console.log(courseList.goodHead)
+    // console.log(courseList.goodHead.url === undefined)
+  }
 
   render () {
     const {courseList} = this.props
-    return (
-      <View className='goodItemB-container' onClick={this.toGoodDetails.bind(this,courseList.objectId)}>
-        <Image className='goodItemB-img'/>
-        <View className='goodItemB-info'>
-          <Text className='goodItemB-title'>{courseList.title} </Text>
-          <Text className='goodItemB-detail'>{courseList.intro} </Text>
-          <View className='goodItemB-authorAndPrice'>
-            <Text className='goodItemB-author'>{courseList.producer}</Text>
-            <Text className='goodItemB-price'>
-              <Text className='goodItemB-price-currency'>￥</Text>
-              <Text className='goodItemB-price-integer'>{courseList.priceInt}</Text>
-              <Text className='goodItemB-price-float'>.{courseList.priceFloat}</Text>
-            </Text>
-          </View>
-          <View className='goodItemB-lesson'>
-            <Text className='goodItemB-student'>{courseList.student + '人参加'}</Text>
-            <Text className='goodItemB-phase'>{'进行至第' + this.WeeksBetw(courseList.createdAt,courseList.updatedAt) + '周'}</Text>
+    if(!courseList.goodHead){
+      return (
+        <View className='goodItemB-container' onClick={this.toGoodDetails.bind(this,courseList.objectId)}>
+          <Image className='goodItemB-img'/>
+          <View className='goodItemB-info'>
+            <Text className='goodItemB-title'>{courseList.title} </Text>
+            <Text className='goodItemB-detail'>{courseList.intro} </Text>
+            <View className='goodItemB-authorAndPrice'>
+              <Text className='goodItemB-author'>{courseList.producer}</Text>
+              <Text className='goodItemB-price'>
+                <Text className='goodItemB-price-currency'>￥</Text>
+                <Text className='goodItemB-price-integer'>{courseList.priceInt}</Text>
+                <Text className='goodItemB-price-float'>.{courseList.priceFloat}</Text>
+              </Text>
+            </View>
+            <View className='goodItemB-lesson'>
+              <Text className='goodItemB-student'>{courseList.student + '人参加'}</Text>
+              <Text className='goodItemB-phase'>{'进行至第' + this.WeeksBetw(courseList.createdAt,courseList.updatedAt) + '周'}</Text>
+            </View>
           </View>
         </View>
-      </View>
-    )
+      )
+    }
+    else{
+      return (
+        <View className='goodItemB-container' onClick={this.toGoodDetails.bind(this,courseList.objectId)}>
+          <Image className='goodItemB-img' mode='scaleToFill' src={courseList.goodHead.url}/>
+          <View className='goodItemB-info'>
+            <Text className='goodItemB-title'>{courseList.title} </Text>
+            <Text className='goodItemB-detail'>{courseList.intro} </Text>
+            <View className='goodItemB-authorAndPrice'>
+              <Text className='goodItemB-author'>{courseList.producer}</Text>
+              <Text className='goodItemB-price'>
+                <Text className='goodItemB-price-currency'>￥</Text>
+                <Text className='goodItemB-price-integer'>{courseList.priceInt}</Text>
+                <Text className='goodItemB-price-float'>.{courseList.priceFloat}</Text>
+              </Text>
+            </View>
+            <View className='goodItemB-lesson'>
+              <Text className='goodItemB-student'>{courseList.student + '人参加'}</Text>
+              <Text className='goodItemB-phase'>{'进行至第' + this.WeeksBetw(courseList.createdAt,courseList.updatedAt) + '周'}</Text>
+            </View>
+          </View>
+        </View>
+      )
+    }
   }
 }

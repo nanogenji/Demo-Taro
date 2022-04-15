@@ -19,18 +19,35 @@ export default class GoodItem extends Component {
   }
   render () {
     const {goodList} = this.props
-    return (
-      <View className='goodItem-container' onClick={this.toGoodDetails.bind(this,goodList.objectId)}>
-        <Image className='goodItem-img'/>
-        <Text className='goodItem-title'>{goodList.title}</Text>
-        <Text className='goodItem-producer'>{goodList.producer}</Text>
-        <View className='goodItem-footer'>
-          <View className='goodItem-student'>
-          <AtIcon value='user' size='18' color='#212121'></AtIcon>
-            {goodList.student + '人'}</View>
-          <Text className='goodItem-price'>{'￥' + goodList.priceInt + '.' + goodList.priceFloat}</Text>
+    if(!goodList.goodHead){
+      return (
+        <View className='goodItem-container' onClick={this.toGoodDetails.bind(this,goodList.objectId)}>
+          <Image className='goodItem-img'/>
+          <Text className='goodItem-title'>{goodList.title}</Text>
+          <Text className='goodItem-producer'>{goodList.producer}</Text>
+          <View className='goodItem-footer'>
+            <View className='goodItem-student'>
+            <AtIcon value='user' size='18' color='#212121'></AtIcon>
+              {goodList.student + '人'}</View>
+            <Text className='goodItem-price'>{'￥' + goodList.priceInt + '.' + goodList.priceFloat}</Text>
+          </View>
         </View>
-      </View>
-    )
+      )
+    }
+    else{
+      return (
+        <View className='goodItem-container' onClick={this.toGoodDetails.bind(this,goodList.objectId)}>
+          <Image className='goodItem-img' src={goodList.goodHead.url}/>
+          <Text className='goodItem-title'>{goodList.title}</Text>
+          <Text className='goodItem-producer'>{goodList.producer}</Text>
+          <View className='goodItem-footer'>
+            <View className='goodItem-student'>
+            <AtIcon value='user' size='18' color='#212121'></AtIcon>
+              {goodList.student + '人'}</View>
+            <Text className='goodItem-price'>{'￥' + goodList.priceInt + '.' + goodList.priceFloat}</Text>
+          </View>
+        </View>
+      )
+    }
   }
 }

@@ -226,7 +226,7 @@ export default class Index extends Component {
   }
   toProfessionTsetInfo(){
     Taro.navigateTo({
-      url:'/pages/professionTestInfo/index'
+      url:'../../pagesA/professionTestInfo/index'
     })
   }
 
@@ -260,20 +260,21 @@ export default class Index extends Component {
         tA++
       }
     }
-
     tC += !(checkedList.includes('5')) + !(checkedList.includes('18')) + !(checkedList.includes('40'))
+    //#region
     tR += !(checkedList.includes('14')) + !(checkedList.includes('23')) + !(checkedList.includes('44')) + !(checkedList.includes('47')) + !(checkedList.includes('48'))
     tI += !(checkedList.includes('21')) + !(checkedList.includes('55')) + !(checkedList.includes('56')) + !(checkedList.includes('58'))
     tE += !(checkedList.includes('3')) + !(checkedList.includes('16')) + !(checkedList.includes('25'))
     tS += !(checkedList.includes('1')) + !(checkedList.includes('12')) + !(checkedList.includes('15')) + !(checkedList.includes('27')) + !(checkedList.includes('45')) + !(checkedList.includes('53'))
     tA += !(checkedList.includes('32'))
+    //#endregion
     // console.log(0+!(checkedList.includes('5')))
-
 
     var arr = [tR,tI,tA,tS,tE,tC].sort((a, b) => a - b)
     if(tR === arr[5] || tR === arr[4] || tR === arr[3]){
       ans +='R'
     }
+    //#region
     if(tI === arr[5] || tI === arr[4] || tI === arr[3]){
       ans +='I'
     }
@@ -292,11 +293,12 @@ export default class Index extends Component {
     if(ans.length > 3){
       ans = ans.substring(0,3)
     }
+    //#endregion
     console.log(arr[5],arr[4],arr[3])
     console.log(ans)
     console.log(arr)
     Taro.navigateTo({
-      url:`/pages/professionTestRes/index?res=${ans}`
+      url:`../../pagesA/professionTestRes/index?res=${ans}`
     })
   }
 

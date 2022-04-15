@@ -16,15 +16,6 @@ export default class CreateArticle extends Component {
     this.state = {
       title: '',
       content:'',
-      // files: [{
-      //   url: 'https://images.unsplash.com/photo-1531804055935-76f44d7c3621?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=688&q=80',
-      // },
-      // {
-      //   url: 'https://images.unsplash.com/photo-1495231916356-a86217efff12?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=736&q=80',
-      // },
-      // {
-      //   url: 'https://images.unsplash.com/photo-1634567044367-b6b18bfec7ba?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=690&q=80',
-      // }]
       isDisabled:true
     }
   }
@@ -32,7 +23,7 @@ export default class CreateArticle extends Component {
     var isDisabled = this.state.isDisabled
     const title = this.state.title
     if(value.length > 0){
-      isDisabled = false
+      isDisabled = true
     }
     else if(value.length === 0){
       isDisabled = true
@@ -50,26 +41,36 @@ export default class CreateArticle extends Component {
     const title = this.state.title
     const content = this.state.content
     const query = Bmob.Query('article');
-    query.set("content",content)
-    query.set("title",title)
-    query.save().then(res => {
+    var temp = ''
+    temp = Taro.getStorageSync('bmob')
+    if(temp === 0){
       Taro.atMessage({
-        'message': '发送成功',
-        'type': 'success',
-      })
-      setTimeout(()=>{
-        Taro.navigateBack({
-          delta:1
-        })
-      },800)
-      console.log(res)
-    }).catch(err => {
-      console.log(err)
-      Taro.atMessage({
-        'message': '发送',
+        'message': '请您先登录账号',
         'type': 'error',
       })
-    })
+    }
+    else{
+      query.set("content",content)
+      query.set("title",title)
+      query.save().then(res => {
+        Taro.atMessage({
+          'message': '发送成功',
+          'type': 'success',
+        })
+        setTimeout(()=>{
+          Taro.navigateBack({
+            delta:1
+          })
+        },800)
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+        Taro.atMessage({
+          'message': '发送失败，请稍后再试',
+          'type': 'error',
+        })
+      })
+    }
   }
 
   handleChangeContent=(content)=>{

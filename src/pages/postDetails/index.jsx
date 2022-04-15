@@ -26,7 +26,7 @@ export default class postDetails extends Component {
 
   touserCard=(userId)=>{
     Taro.navigateTo({
-      url:`/pages/userCard/index?userId=${userId}`
+      url:`../../pagesA/userCard/index?userId=${userId}`
     })
   }
 

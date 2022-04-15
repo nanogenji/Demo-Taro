@@ -35,14 +35,16 @@ export default class AccountInfo extends Component {
     //   }
     // })
     temp = Taro.getStorageSync('bmob')
-    this.setState({userId:Taro.getStorageSync('bmob').slice(Taro.getStorageSync('bmob').indexOf('objectId')+21,Taro.getStorageSync('bmob').indexOf('objectId')+21)})
+    // console.log(temp.slice(temp.indexOf('objectId')+11,temp.indexOf('objectId')+21))
+    this.setState({userId:temp.slice(temp.indexOf('objectId')+11,temp.indexOf('objectId')+21)})
   }
 
   componentDidMount(){
     const userId = this.state.userId
-    console.log(userId)
+    const userInfo = this.state.userInfo
     const query = Bmob.Query('_User');
-    query.get('').then(res => {
+    query.get(userId).then(res => {
+      this.setState({userInfo:res})
       console.log(res)
     }).catch(err => {
       console.log(err)
@@ -50,7 +52,7 @@ export default class AccountInfo extends Component {
   }
 
   logout(){
-    // Bmob.User.logout()
+    Bmob.User.logout()
     Taro.atMessage({
       'message': '您已退出登录',
       'type': 'error',
@@ -67,18 +69,17 @@ export default class AccountInfo extends Component {
       <View className='bd'>
         <View className='infoTitle'>用户名</View>
         <ScrollView className='infoContainer'>
-          <List name={userInfo.userName} value={userInfo.objectId} />
+          <List name={userInfo.username} value={userInfo.objectId} />
         </ScrollView>
         <View className='infoTitle'>账户信息</View>
         <ScrollView className='infoContainer'>
           <List name='注册时间' value={userInfo.createdAt} />
           <List name='邮箱' value={userInfo.email} />
-          <List name='手机号' value={userInfo.mobilePhoneNum} />
+          <List name='手机号' value={userInfo.phone} />
           <List name='个性签名' value={userInfo.sign} />
         </ScrollView>
       <AtButton className='logout' circl={true} onClick={this.logout}>退出账号</AtButton>
       <AtMessage/>
-
       </View>
     )
   }
